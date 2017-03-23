@@ -3,22 +3,27 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.16.0",
+    "bootstrap-sass": "~3.3.7",
+    "client-sessions": "~0.7.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "express": "~4.14.1",
     "express-handlebars": "~3.0.0",
     "handlebars": "~4.0.6",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.2",
-    "client-sessions": "~0.7.0",
     "jquery": "~3.1.1",
-    "tedious": "~1.15.0",
-    "bootstrap-sass": "~3.3.7",
+    "morgan": "~1.7.0",
     "node-sass-middleware": "^0.9.8",
-    "sequelize": "~3.30.2"
+    "nodemon": "^1.11.0",
+    "sequelize": "~3.30.2",
+    "serve-favicon": "~2.3.2",
+    "tedious": "~1.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
