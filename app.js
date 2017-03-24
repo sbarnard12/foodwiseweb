@@ -12,7 +12,7 @@ var users = require('./routes/users');
 
 var app = express();
 
-
+require('./db/models');
 
 // view engine setup
 app.engine('hbs', exphbs({extname: '.hbs', defaultLayout: 'layout'}));
