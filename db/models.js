@@ -41,7 +41,7 @@ var users = sequelize.define('users', {
 	lastName: {type: SequelizeLib.STRING},
 	userName: {type: SequelizeLib.STRING},
 	password: {type: SequelizeLib.STRING}
-})
+});
 
 var preferences = sequelize.define('preferences', {
 	id: {
@@ -54,13 +54,29 @@ var preferences = sequelize.define('preferences', {
 	dislikes: {type: SequelizeLib.STRING},
 	likes: {type: SequelizeLib.STRING},
 	favouriteRecipes: {type: SequelizeLib.STRING},
-})
+	nutritionPreferences: {type: SequelizeLib.STRING}
+});
 
+var flavourEnum = SequelizeLib.ENUM('low', 'medium', 'high');
+
+var flavourTypes = sequelize.define('flavourTypes', {
+	id: {
+		type: SequelizeLib.INTEGER,
+		primaryKey: true,
+		autoIncrement: true
+	},
+	salty: {type: flavourEnum},
+	sweet: {type: flavourEnum},
+	bitter: {type: flavourEnum},
+	meaty: {type: flavourEnum},
+	spicy: {type: flavourEnum}
+});
 
 
 //set foreign key
 //1 store has many sale items, 1:many
-storeInfoModel.hasMany(saleItemModel, {as: 'saleItems'});
+saleItemModel.hasOne(storeInfoModel, {as: 'storeId'});
+preferences.hasOne(flavourTypes, {as: 'flavourtypes'});
 
 
 module.exports = {

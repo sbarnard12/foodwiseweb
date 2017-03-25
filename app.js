@@ -7,8 +7,12 @@ var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var sassMiddleware = require('node-sass-middleware');
 
+
+//define route or import route file 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var test = require('./routes/test');
+
 
 var app = express();
 
@@ -34,11 +38,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/fonts', express.static(path.join(__dirname, 'node_modules/bootstrap-sass/assets/fonts')));
 
+
+//route destinations
 app.use('/', index);
 app.use('/users', users);
-
-
-
+app.use('/test', test);
 
 
 // catch 404 and forward to error handler
