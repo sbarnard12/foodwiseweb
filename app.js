@@ -9,6 +9,10 @@ var sassMiddleware = require('node-sass-middleware');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var searchRecipes = require('./routes/searchRecipes');
+var viewSales = require('./routes/viewSales');
+var homeIngredients = require('./routes/homeIngredients');
+var setPreferences = require('./routes/setPreferences');
 
 var app = express();
 
@@ -36,10 +40,10 @@ app.use('/fonts', express.static(path.join(__dirname, 'node_modules/bootstrap-sa
 
 app.use('/', index);
 app.use('/users', users);
-
-
-
-
+app.use('/searchRecipes', searchRecipes);
+app.use('/viewSales', viewSales);
+app.use('/homeIngredients', homeIngredients);
+app.use('/setPreferences', setPreferences);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
