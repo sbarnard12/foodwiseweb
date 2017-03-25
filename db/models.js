@@ -31,6 +31,33 @@ var saleItemModel = sequelize.define('saleItems', {
 	item_description: {type: SequelizeLib.STRING}
 });
 
+var users = sequelize.define('users', {
+	id: {
+		type: SequelizeLib.INTEGER,
+		primaryKey:true,
+		autoIncrement:true
+	},
+	firstName: {type: SequelizeLib.STRING},
+	lastName: {type: SequelizeLib.STRING},
+	userName: {type: SequelizeLib.STRING},
+	password: {type: SequelizeLib.STRING}
+})
+
+var preferences = sequelize.define('preferences', {
+	id: {
+		type: SequelizeLib.INTEGER,
+		primaryKey: true,
+		autoIncrement:true
+	},
+	allergies: {type: SequelizeLib.STRING},
+	vegetarian: {type: SequelizeLib.ENUM('vegetarian', 'vegan','meat')},
+	dislikes: {type: SequelizeLib.STRING},
+	likes: {type: SequelizeLib.STRING},
+	favouriteRecipes: {type: SequelizeLib.STRING},
+})
+
+
+
 //set foreign key
 //1 store has many sale items, 1:many
 storeInfoModel.hasMany(saleItemModel, {as: 'saleItems'});
