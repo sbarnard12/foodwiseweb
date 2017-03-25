@@ -82,6 +82,6 @@ preferences.hasOne(flavourTypes, {as: 'flavourtypes'});
 module.exports = {
 	storeInfoModel: storeInfoModel,
 	saleItemModel: saleItemModel
-	};
+};
 
 

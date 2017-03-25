@@ -5,12 +5,26 @@ var options = {
     path: '/v1/api/recipes?_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4&maxResult=10&start=1'
 };
 
-var getAll = function(){
+var getAll = function(callback){
     sendRequest(function(results){
-        res.send(results);
+        callback(results);
     });
-};
+}
 
+var getOne = function(request, callback){
+    var searchString = parseSearch(request.params.searchterm);
+
+    options.path = options.path + searchString;
+    sendRequest(function(results){
+        callback(results);
+    });
+}
+
+var parseSearch = function(string){
+    var stringArray = string.split(" ");
+    var newString = stringArray.join("+");
+    return "&q=" + newString;
+}
 
 var sendRequest = function(callback){
     var responseFunc = function(response) {
@@ -31,5 +45,6 @@ var sendRequest = function(callback){
 }
 
 module.exports = {
-    getAll: getAll
+    getAll: getAll,
+    getOne: getOne
 };
