@@ -1,5 +1,43 @@
  @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
- .container {
- 	background-color: green
+ body{
+   background: #0c0a0f no-repeat fixed center center;
+   background-image: url('http://www.tokkoro.com/picsup/471109-fruit-wallpaper-desktop.jpg');
+ }
+
+ .header, .footer{
+   background-color: #339933;
+   color: white;
+ }
+
+ .navbar{
+   text-align: center;
+ }
+
+   .navbar a:link{
+     color: white;
+     text-decoration: none;
+   }
+
+   .navbar a:visited{
+     color: white;
+     text-decoration: none;
+   }
+
+   .navbar a:hover{
+     color: #99ff66;
+     text-decoration: none;
+   }
+
+ .body-container{
+
+   padding: 25px;
+ }
+
+ .body-content-container{
+   background-color: white;
+   width: 700px;
+   min-height: 600px;
+   margin: auto;
+   padding: 25px;
  }
