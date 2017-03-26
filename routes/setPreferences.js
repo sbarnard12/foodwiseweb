@@ -5,6 +5,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('setPreferences', {});
 });
+router.post('/', function(req,res,next){
+    preferencesService.savenew(req, function(){});
+})
 
 module.exports = router;
 /**
