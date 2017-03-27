@@ -9,7 +9,10 @@ var login = function(){
 	$.ajax({
 		url: "login",
 		method: "post",
-
+        data: $('#login').serialize(),
+        success: function(result){
+            window.location = "http://localhost:3000/searchRecipes";
+        }
 
 	})
 }

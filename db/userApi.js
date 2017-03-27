@@ -4,14 +4,6 @@ var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
 var config = require(path.resolve( __dirname, "./config.js"));
 
-var checkUser = function(user, callback){
-    //get user
-    getUserbyUserName(user.userName, function(result){
-
-    })
-    
-}
-
 var createflavourPref = function(data, callback){
 
     var requestString = "";
@@ -29,11 +21,13 @@ var createflavourPref = function(data, callback){
             connection.close();
             status = err;
             callback(status)
+        } else {
+            //make sure to close the connection before the callback
+            connection.close();
+            status = "success";
+            callback(status, row_id);
         }
-        //make sure to close the connection before the callback
-        connection.close();
-        status = "success";
-        callback(status, row_id);
+
     });
 
     request.on('row', function(columns){
@@ -43,7 +37,6 @@ var createflavourPref = function(data, callback){
     var connection = new Connection(config);
     connection.on('connect', function(err) {
         if (err) return console.error(err);
-        console.log("Connected 2");
         connection.execSql(request);
     });
 };
@@ -66,11 +59,13 @@ var createPref = function(data, callback){
             connection.close();
             status = err;
             callback(status)
+        } else {
+            //make sure to close the connection before the callback
+            connection.close();
+            status = "success";
+            callback(status, row_id);   
         }
-        //make sure to close the connection before the callback
-        connection.close();
-        status = "success";
-        callback(status, row_id);
+
     });
 
     request.on('row', function(columns){
@@ -87,7 +82,6 @@ var createPref = function(data, callback){
     var connection = new Connection(config);
     connection.on('connect', function(err) {
         if (err) return console.error(err);
-        console.log("Connected 2");
         connection.execSql(request);
     });
 };
@@ -106,12 +100,13 @@ var createUser = function(userData, callback){
         if(err){
             connection.close();
             status = err;
-            callback(status)
+            callback(status);
+        } else {
+            //make sure to close the connection before the callback
+            connection.close();
+            status = "success";
+            callback(status);  
         }
-        //make sure to close the connection before the callback
-        connection.close();
-        status = "success";
-        callback(status);
     });
 
     request.on('row', function(columns){
@@ -126,7 +121,6 @@ var createUser = function(userData, callback){
     var connection = new Connection(config);
     connection.on('connect', function(err) {
         if (err) return console.error(err);
-        console.log("Connected 2");
         connection.execSql(request);
     });
 };
@@ -151,23 +145,44 @@ var checkUserName = function(userName, callback){
     var connection = new Connection(config);
     connection.on('connect', function(err) {
         if (err) return console.error(err);
-        console.log("Connected 2");
         connection.execSql(request);
     });
 
 };
 
+var getUserByUserName = function(username, callback){
 
+    var requestString = "select * from users where userName = '" + username + "';";
 
-var getUserbyUserName = function(username, callback){
-    var requestString = "";
+    var request = new Request(requestString, function(err, rowCount, rows){
+        var status = undefined;
+        if(err){
+            connection.close();
+            status = err;
+            callback(status)
+        } else {
+            connection.close();
+            status = "success";
+            callback(status, rowCount, rows)
+        }
+    });
+    request.on('row', function(columns){
+        columns.forEach(function(column){
+        })
+    });
 
-}
+    var connection = new Connection(config);
+    connection.on('connect', function(err) {
+        if (err) return console.error(err);
+        connection.execSql(request);
+    });
+
+};
 
 module.exports = {
-    checkUser: checkUser,
     createflavourPref: createflavourPref,
     createPref: createPref,
     createUser: createUser,
-    checkUserName: checkUserName
+    checkUserName: checkUserName,
+    getUserByUserName: getUserByUserName
 }

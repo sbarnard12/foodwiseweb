@@ -50,13 +50,53 @@ var newUser = function(data, callback){
     });
 };
 
-var checkUser = function(user, callback){
+var checkUser = function(req, user, callback){
 
-    userApi.checkUser(user, function(result){
-        callback(result);
-    })
+    var username = user.userName;
+    var password = user.password;
 
+    userApi.getUserByUserName(username, function(status, count, user){
+        if(status == "success"){
+            //check if password matches
+            var userObject = user[0];
+            if(userObject[4].value == password){
+                req.user = userObject;
+                req.session.user_id = userObject[0].value;
+                req.session.userName = userObject[3].value;
+                req.session.name = userObject[1].value + " " + userObject[2].value;
+                callback("success");
+            } else { //wrong password
+                callback("invalid username or password");
+            }
+        } else {
+            callback("invalid username or password");
+        }
+    });
 };
+
+var getUser = function(req,res, next){
+    if(req.session && req.session.userName){
+        userApi.getUserByUserName(req.session.userName, function(status, count, user){
+            if(count > 0){
+                var userObject = user[0];
+                req.user = userObject;
+                req.session.user_id = userObject[0].value;
+                req.session.userName = userObject[3].value;
+                req.session.name = userObject[1].value + " " + userObject[2].value;
+                res.locals.user = userObject;
+            }
+            next();
+        })
+    } else {
+        next();
+    }
+};
+
+var logoutUser = function(req, callback){
+    req.session.destroy();
+    callback("success");
+}
+
 
 var returnError = function(status){
     var result = {};
@@ -64,8 +104,11 @@ var returnError = function(status){
     result.error = status;
     return result;
 }
-
+;
 
 module.exports = {
-    newUser: newUser
+    newUser: newUser,
+    checkUser: checkUser,
+    getUser: getUser,
+    logoutUser: logoutUser
 }

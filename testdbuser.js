@@ -8,46 +8,41 @@ var config = require('./db/config.js')
 
 var go = function(){
     //first check if username is taken
-    var un = 'tod';
-    checkUserName(un, function(isUnique){
-        if(isUnique){
-            //first need to create the flavourPref table
-            createflavourPref("data", function(rows, row_id){
-                console.log(rows, row_id);
-                //pass in the id of the flavour pref table
-                var data = {
-                    allergies: "",
-                    dislikes: "tomatoes",
-                    likes: "chocolate",
-                    favouriteRecipes: "",
-                    vegetarian: "Non-Vegetarian",
-                    nutritionPreferences: "Default"
-                };
-                data.flavPrefId = row_id;
-                //pass the flavour pref table id into preferences
-                //create the preferences table
-                createPref(data, function(rows, row_id){
-                    console.log(rows, row_id);
-                    //now finally create the user table
-                    var userData = {
-                        firstName: "sam",
-                        lastName: "barnard",
-                        userName: "sambam",
-                        password: "sam"
-                    };
-                    userData.prefId = row_id;
-                    createUser(userData, function(rows, row_id){
-                        console.log(rows, row_id);
-                    });
-                });
-            });
-        } else {
-            //return error
-            console.log("pick a new username");
-        }
-    });
+    getUserbyUserName("sam", function(status, user){
+        console.log(user);
+    })
 };
 
+var getUserbyUserName = function(username, callback){
+
+    var requestString = "select * from users where userName = '" + username + "';";
+
+    var request = new Request(requestString, function(err, rowCount, rows){
+        var status = undefined;
+        if(err){
+            connection.close();
+            status = err;
+            callback(status)
+        } else {
+            connection.close();
+            status = "success";
+            callback(status, rows)
+        }
+    });
+    request.on('row', function(columns){
+        columns.forEach(function(column){
+            console.log(column.value);
+        })
+    });
+
+    var connection = new Connection(config);
+    connection.on('connect', function(err) {
+        if (err) return console.error(err);
+        console.log("Connected 2");
+        connection.execSql(request);
+    });
+
+};
 
 var createflavourPref = function(data, callback){
 
