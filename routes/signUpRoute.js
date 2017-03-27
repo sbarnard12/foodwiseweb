@@ -8,7 +8,9 @@ router.route('/')
  		res.render('signupView');
 	})
 	.post(function(req,res, next){
-		userService.newUser(req.body);
+		userService.newUser(req.body, function(result){
+            res.send(result);
+        });
 	})
 ;
 

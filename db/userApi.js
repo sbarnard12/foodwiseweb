@@ -4,47 +4,13 @@ var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
 var config = require(path.resolve( __dirname, "./config.js"));
 
-var createNewUser = function(userData, callback){
-    //first check if username is taken
-    checkUserName(userData.userName, function(isUnique){
-        if(isUnique){
-            //first need to create the flavourPref table
-            createflavourPref(userData, function(status,row_id){
-                //if failed, return to service the failure
-                if(status != "success"){
-                    callback(returnError(status));
-                }
-                //pass in the id of the flavour pref table into the userData object
-                userData.flavPrefId = row_id;
-                //pass the flavour pref table id into preferences
+var checkUser = function(user, callback){
+    //get user
+    getUserbyUserName(user.userName, function(result){
 
-                //create the preferences table
-                createPref(userData, function(status,row_id){
-                    if (status != "success"){
-                        callback(returnError(status));
-                    }
-                    //now finally create the user table
-                    userData.prefId = row_id;
-                    createUser(userData, function(status){
-                        if(status == "success"){
-                            callback(status);
-                        } else {
-                            callback(returnError(status));
-                        }
-                    });
-                });
-            });
-        } else {
-            //return error
-            var result = {};
-            result.status = "fail";
-            result.error = "username already exists";
-
-            callback(result);
-        }
-    });
-};
-
+    })
+    
+}
 
 var createflavourPref = function(data, callback){
 
@@ -191,13 +157,17 @@ var checkUserName = function(userName, callback){
 
 };
 
-var returnError = function(status){
-    var result = {};
-    result.status = "fail";
-    result.error = status;
-    return result;
+
+
+var getUserbyUserName = function(username, callback){
+    var requestString = "";
+
 }
 
 module.exports = {
-    createNewUser: createNewUser
+    checkUser: checkUser,
+    createflavourPref: createflavourPref,
+    createPref: createPref,
+    createUser: createUser,
+    checkUserName: checkUserName
 }
