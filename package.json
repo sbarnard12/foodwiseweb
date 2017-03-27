@@ -22,7 +22,8 @@
     "nodemon": "^1.11.0",
     "sequelize": "~3.30.2",
     "serve-favicon": "~2.3.2",
-    "tedious": "~1.15.0"
+    "tedious": "~1.15.0",
+    "node-fetch": "~1.6.3"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

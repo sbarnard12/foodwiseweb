@@ -15,7 +15,8 @@ var storeInfoModel = sequelize.define('storeInfo', {
 		},
 	store_name: {type: SequelizeLib.STRING},
 	store_location: {type: SequelizeLib.STRING}
-});
+},
+    {timestamps: false});
 
 
 //Sale item table
@@ -29,9 +30,10 @@ var saleItemModel = sequelize.define('saleItems', {
 	productTitle: {type: SequelizeLib.STRING},
 	priceString: {type: SequelizeLib.DOUBLE},
 	item_description: {type: SequelizeLib.STRING}
-});
+},
+    {timestamps: false});
 
-var users = sequelize.define('users', {
+var usersModel = sequelize.define('users', {
 	id: {
 		type: SequelizeLib.INTEGER,
 		primaryKey:true,
@@ -41,7 +43,8 @@ var users = sequelize.define('users', {
 	lastName: {type: SequelizeLib.STRING},
 	userName: {type: SequelizeLib.STRING},
 	password: {type: SequelizeLib.STRING}
-});
+},
+    {timestamps: false});
 
 var preferences = sequelize.define('preferences', {
 	id: {
@@ -50,38 +53,82 @@ var preferences = sequelize.define('preferences', {
 		autoIncrement:true
 	},
 	allergies: {type: SequelizeLib.STRING},
-	vegetarian: {type: SequelizeLib.ENUM('vegetarian', 'vegan','meat')},
+	//vegetarian: {type: SequelizeLib.INTEGER},
 	dislikes: {type: SequelizeLib.STRING},
 	likes: {type: SequelizeLib.STRING},
-	favouriteRecipes: {type: SequelizeLib.STRING},
-	nutritionPreferences: {type: SequelizeLib.STRING}
-});
+	favouriteRecipes: {type: SequelizeLib.STRING}
+	//nutritionPreferences: {type: SequelizeLib.INTEGER}
+},
+    {timestamps: false});
 
-var flavourEnum = SequelizeLib.ENUM('low', 'medium', 'high');
-
-var flavourTypes = sequelize.define('flavourTypes', {
+var flavourPreferences = sequelize.define('flavourPreferences', {
 	id: {
 		type: SequelizeLib.INTEGER,
 		primaryKey: true,
 		autoIncrement: true
-	},
-	salty: {type: flavourEnum},
-	sweet: {type: flavourEnum},
-	bitter: {type: flavourEnum},
-	meaty: {type: flavourEnum},
-	spicy: {type: flavourEnum}
-});
+	}
+	/*salty: {type: SequelizeLib.INTEGER},
+	sweet: {type: SequelizeLib.INTEGER},
+	bitter: {type: SequelizeLib.INTEGER},
+	meaty: {type: SequelizeLib.INTEGER},
+	spicy: {type: SequelizeLib.INTEGER} */
+},
+    {timestamps: false});
+
+//lookup tables
+var flavourLookup = sequelize.define('flavourTypes', {
+        flavourTypeId: {
+            type: SequelizeLib.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        flavourTypeName: {type: SequelizeLib.STRING}
+    },
+    {timestamps: false});
+
+var nutritionLookup = sequelize.define('nutritionLookup', {
+    nutritionId: {
+        type: SequelizeLib.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    nutritionType: {type: SequelizeLib.STRING}
+},
+    {timestamps: false});
+
+var vegLookup = sequelize.define('vegLookup', {
+    vegId: {
+        type: SequelizeLib.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    vegname: {type: SequelizeLib.STRING}
+},
+    {timestamps: false});
+
 
 
 //set foreign key
-//1 store has many sale items, 1:many
 saleItemModel.hasOne(storeInfoModel, {as: 'storeId'});
-preferences.hasOne(flavourTypes, {as: 'flavourtypes'});
-
+usersModel.hasOne(preferences, {as: 'preferences'});
+flavourPreferences.hasMany(preferences, {as: 'flavourPreferences'});
+nutritionLookup.hasMany(preferences, {as: 'nutritionPreferences'});
+vegLookup.hasMany(preferences, {as: 'vegetarian'});
+flavourLookup.hasMany(flavourPreferences, {as: 'salty'});
+flavourLookup.hasMany(flavourPreferences, {as: 'sweet'});
+flavourLookup.hasMany(flavourPreferences, {as: 'bitter'});
+flavourLookup.hasMany(flavourPreferences, {as: 'meaty'});
+flavourLookup.hasMany(flavourPreferences, {as: 'spicy'});
 
 module.exports = {
 	storeInfoModel: storeInfoModel,
-	saleItemModel: saleItemModel
+	saleItemModel: saleItemModel,
+    usersModel: usersModel,
+    flavourPreferences: flavourPreferences,
+    preferences: preferences,
+    flavourLookup: flavourLookup,
+    nutritionLookup: nutritionLookup,
+    vegLookup: vegLookup
 };
 
 

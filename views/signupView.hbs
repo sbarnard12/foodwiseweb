@@ -1,0 +1,94 @@
+<h1>Sign Up a new account</h1>
+<div class="container" style="background-color: white">
+	<form id="signup">
+		<div class="row">
+			<label for="firstName">first name</label>
+			<input type="text" name="firstName">
+		</div>
+		<div class="row">
+			<label for="lastName">last name</label>
+			<input type="text" name="lastName">
+		</div>
+		<div class="row">
+			<label for="userName">user name</label>
+			<input type="text" name="userName">
+		</div>
+		<div class="row">
+			<label for="password">password</label>
+			<input type="text" name="password">
+		</div>
+
+		<div class="row">
+			<label for="allergies">any allergies?</label>
+			<input type="checkbox" name="allergies" value="Peanut-Free"> Peanuts
+			<input type="checkbox" name="allergies" value="Seafood-Free"> Seafood
+			<input type="checkbox" name="allergies" value="Sesame-Free"> Sesame
+			<input type="checkbox" name="allergies" value="Soy-Free"> Soy
+			<input type="checkbox" name="allergies" value="Dairy-Free"> Dairy
+			<input type="checkbox" name="allergies" value="Egg-Free"> Egg
+			<input type="checkbox" name="allergies" value="Sulfite-Free"> Sulfite
+			<input type="checkbox" name="allergies" value="Tree Nut-Free"> Tree Nut
+			<input type="checkbox" name="allergies" value="Wheat-Free"> Wheat
+		</div>
+
+		<div class="row">
+			<label for="vegOption">Vegetarian option</label>
+			<input type="radio" name="vegOption" value="Vegetarian"> Vegetarian
+			<input type="radio" name="vegOption" value="Vegan"> Vegan
+			<input type="radio" name="vegOption" value="Non-Vegetarian" checked="checked"> None (meat eater)
+		</div>
+        <h3>If no answer, leave blank: </h3>
+		<div class="row">
+			<label for="dislikes">Any significant food dislikes?</label>
+			<input type="text" name="dislikes">
+		</div>
+		<div class="row">
+			<label for="likes">Which foods do you love?</label>
+			<input type="text" name="likes">
+		</div>
+
+		<div class="row">
+			<label for="nutritionPref">Any nutrition preferences?</label>
+			<input type="text" name="nutritionPref">
+		</div>
+        <h3>How do you like your food?</h3>
+        <div class="row">
+            <label for="salty">salty</label>
+            <input type="radio" name="salty" value="Default" checked="checked"> No Preference
+            <input type="radio" name="salty" value="Low"> Low
+            <input type="radio" name="salty" value="Medium"> Medium
+            <input type="radio" name="salty" value="High"> High
+        </div>
+        <div class="row">
+            <label for="sweet">Sweet</label>
+            <input type="radio" name="sweet" value="Default" checked="checked"> No Preference
+            <input type="radio" name="sweet" value="Low"> Low
+            <input type="radio" name="sweet" value="Medium"> Medium
+            <input type="radio" name="sweet" value="High"> High
+        </div>
+        <div class="row">
+            <label for="bitter">Bitter</label>
+            <input type="radio" name="bitter" value="Default" checked="checked"> No Preference
+            <input type="radio" name="bitter" value="Low"> Low
+            <input type="radio" name="bitter" value="Medium"> Medium
+            <input type="radio" name="bitter" value="High"> High
+        </div>
+        <div class="row">
+            <label for="meaty">Savory</label>
+            <input type="radio" name="meaty" value="Default" checked="checked"> No Preference
+            <input type="radio" name="meaty" value="Low"> Low
+            <input type="radio" name="meaty" value="Medium"> Medium
+            <input type="radio" name="meaty" value="High"> High
+        </div>
+        <div class="row">
+            <label for="spicy">Spicy</label>
+            <input type="radio" name="spicy" value="Default" checked="checked"> No Preference
+            <input type="radio" name="spicy" value="Low"> Low
+            <input type="radio" name="spicy" value="Medium"> Medium
+            <input type="radio" name="spicy" value="High"> High
+        </div>
+	</form>
+	<button id="signup_button">Submit!</button>
+</div>
+
+<script src="/javascripts/signUpScript.js"></script>

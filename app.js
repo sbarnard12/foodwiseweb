@@ -16,10 +16,10 @@ var viewSales = require('./routes/viewSales');
 var homeIngredients = require('./routes/homeIngredients');
 var setPreferences = require('./routes/setPreferences');
 var flyer = require('./routes/flyerRouteTest');
+var login = require('./routes/loginRoute');
+var signup = require('./routes/signUpRoute');
 
 var app = express();
-
-require('./db/models');
 
 // view engine setup
 app.engine('hbs', exphbs({extname: '.hbs', defaultLayout: 'layout'}));
@@ -50,6 +50,8 @@ app.use('/viewSales', viewSales);
 app.use('/homeIngredients', homeIngredients);
 app.use('/setPreferences', setPreferences);
 app.use('/flyer', flyer);
+app.use('/login', login);
+app.use('/signup', signup);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
