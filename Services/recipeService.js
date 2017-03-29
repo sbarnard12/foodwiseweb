@@ -20,9 +20,9 @@ var getOne = function(request, callback){
     
     var userId = request.session.userId;
     
-    getPreferences(userId, function(preferences){
+    //getPreferences(userId, function(preferences){
         
-    });
+    //});
     
     options.path = options.path + searchString;
     sendRequest(function(results){

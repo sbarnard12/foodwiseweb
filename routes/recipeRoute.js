@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var flyerService = require('../Services/flyerService.js');
+var flyerService = require('../Services/recipeService.js');
 
 /* GET search page for recipes. */
 router.route('/')
