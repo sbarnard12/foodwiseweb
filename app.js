@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var sassMiddleware = require('node-sass-middleware');
+var session = require('client-sessions');
 
 
 //define route or import route file 
@@ -16,10 +17,11 @@ var viewSales = require('./routes/viewSales');
 var homeIngredients = require('./routes/homeIngredients');
 var setPreferences = require('./routes/setPreferences');
 var flyer = require('./routes/flyerRouteTest');
+var login = require('./routes/loginRoute');
+var signup = require('./routes/signUpRoute');
+var logout = require('./routes/logoutRoute');
 
 var app = express();
-
-require('./db/models');
 
 // view engine setup
 app.engine('hbs', exphbs({extname: '.hbs', defaultLayout: 'layout'}));
@@ -32,6 +34,27 @@ app.engine('hbs', exphbs({extname: '.hbs', defaultLayout: 'layout'}));
      debug: true,
    })
  );
+
+app.use(session({
+    cookieName: 'session',
+    secret: 'random_string_goes_here_to_encrypt',
+    duration: 30 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000
+}));
+var userService = require('./Services/userService.js');
+app.use(function(req, res, next){
+    userService.getUser(req,res,next);
+});
+
+function requireLogin(req, res, next){
+    if(req.user || req.path === '/login' || req.path === '/signup'){
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -40,7 +63,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/fonts', express.static(path.join(__dirname, 'node_modules/bootstrap-sass/assets/fonts')));
-
+app.use(requireLogin);
 
 //route destinations
 app.use('/', index);
@@ -50,6 +73,9 @@ app.use('/viewSales', viewSales);
 app.use('/homeIngredients', homeIngredients);
 app.use('/setPreferences', setPreferences);
 app.use('/flyer', flyer);
+app.use('/login', login);
+app.use('/signup', signup);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
