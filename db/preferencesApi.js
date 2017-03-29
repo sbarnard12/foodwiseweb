@@ -85,7 +85,7 @@ var getAllRelevantPreferencesByUserId = function(userId, callback){
         } else {
             connection.close();
             status = "success";
-            callback(status, rowCount, rows);
+            callback(status, rowCount, rows[0]);
         }
     });
 
@@ -96,13 +96,16 @@ var getAllRelevantPreferencesByUserId = function(userId, callback){
     });
 };
 
-var crazyJoinString = "select u.userName as username, p.id, p.allergies, p.dislikes, p.likes, v.vegName, " +
-    "n.nutritionType, t1.flavourTypeName as salty, t2.flavourTypeName as sweet, t3.flavourTypeName as bitter, " +
-    "t4.flavourTypeName as meaty, t5.flavourTypeName as spicy from users u join preferences p On u.preferences = p.id " +
-    "join vegLookup v On p.vegetarian = v.vegId join nutritionLookup n on p.nutritionPreferences = n.nutritionId " +
-    "join flavourPreferences f On p.flavourPreferences = f.id join flavourTypes t1 On f.saltyId= t1.flavourTypeId " +
-    "join flavourTypes t2 On f.sweetId = t2.flavourTypeId join flavourTypes t3 On f.bitterId = t3.flavourTypeId " +
-    "join flavourTypes t4 On f.meatyId = t4.flavourTypeId join flavourTypes t5 On f.spicyId = t5.flavourTypeId where u.id =";
+var crazyJoinString = "select u.userName as username, p.id, p.allergies, p.dislikes, p.likes, v.vegName, n.nutritionType, t1.flavourTypeName as salty, t2.flavourTypeName as sweet, t3.flavourTypeName as bitter, t4.flavourTypeName as meaty, t5.flavourTypeName as spicy " +
+" from users u" +
+" join preferences p On u.preferences = p.id join vegLookup v On p.vegetarian = v.vegId " +
+" join nutritionLookup n on p.nutritionPreferences = n.nutritionId join flavourPreferences f On p.flavourPreferences = f.id " +
+" join flavourTypes t1 On f.saltyId= t1.flavourTypeId join flavourTypes t2 On f.sweetId = t2.flavourTypeId " +
+" join flavourTypes t3 On f.bitterId = t3.flavourTypeId join flavourTypes t4 On f.meatyId = t4.flavourTypeId " +
+" join flavourTypes t5 On f.spicyId = t5.flavourTypeId " +
+" where u.id = ";
+
+
 module.exports = {
     getPreferencesById: getPreferencesById,
     createPref: createPref,
