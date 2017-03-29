@@ -5,7 +5,7 @@ $(function(){
 var submitSearch = function(event){
     event.preventDefault();
     var searchterm = $('#search').val();
-    var url = 'flyer/' + searchterm;
+    var url = 'recipes/' + searchterm;
     $.ajax({
         url: url,
         type: 'GET',

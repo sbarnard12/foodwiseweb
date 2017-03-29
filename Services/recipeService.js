@@ -1,4 +1,7 @@
 var http = require('http');
+var userApi = require('../db/userApi');
+var preferencesApi = require('../db/preferencesApi');
+
 
 var options = {
     host: 'api.yummly.com',
@@ -9,22 +12,29 @@ var getAll = function(callback){
     sendRequest(function(results){
         callback(results);
     });
-}
+};
 
 var getOne = function(request, callback){
+    //set query search term
     var searchString = parseSearch(request.params.searchterm);
-
+    
+    var userId = request.session.userId;
+    
+    //getPreferences(userId, function(preferences){
+        
+    //});
+    
     options.path = options.path + searchString;
     sendRequest(function(results){
         callback(results);
     });
-}
+};
 
 var parseSearch = function(string){
     var stringArray = string.split(" ");
     var newString = stringArray.join("+");
     return "&q=" + newString;
-}
+};
 
 var sendRequest = function(callback){
     var responseFunc = function(response) {
@@ -40,9 +50,20 @@ var sendRequest = function(callback){
             var test = JSON.parse(str);
             callback(test);
         });
-    }
+    };
     http.request(options, responseFunc).end();
-}
+};
+
+var getPreferences = function(userId, callback){
+    var prefArray = undefined;
+    preferencesApi.getAllRelevantPreferencesByUserId(userId, function(status, rowCount, preferences){
+        if(status == "success"){
+            callback(preferences);
+        } else {
+            callback(status);
+        }
+    })
+};
 
 module.exports = {
     getAll: getAll,

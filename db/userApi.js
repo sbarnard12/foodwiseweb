@@ -4,88 +4,6 @@ var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
 var config = require(path.resolve( __dirname, "./config.js"));
 
-var createflavourPref = function(data, callback){
-
-    var requestString = "";
-    var row_id = undefined;
-    requestString = requestString + "insert into flavourPreferences (saltyId, sweetId, bitterId, meatyId, spicyId) values(";
-    requestString = requestString + " (select flavourTypeId from flavourTypes where flavourTypeName= '"+ data.flavours.salty +"'),";
-    requestString = requestString + " (select flavourTypeId from flavourTypes where flavourTypeName= '"+ data.flavours.sweet +"'),";
-    requestString = requestString + " (select flavourTypeId from flavourTypes where flavourTypeName= '"+ data.flavours.bitter +"'),";
-    requestString = requestString + " (select flavourTypeId from flavourTypes where flavourTypeName= '"+ data.flavours.meaty +"'),";
-    requestString = requestString + " (select flavourTypeId from flavourTypes where flavourTypeName= '"+ data.flavours.spicy +"')";
-    requestString = requestString + "); select @@identity;";
-    var request = new Request(requestString, function(err, rowCount, rows){
-        var status = "";
-        if(err){
-            connection.close();
-            status = err;
-            callback(status)
-        } else {
-            //make sure to close the connection before the callback
-            connection.close();
-            status = "success";
-            callback(status, row_id);
-        }
-
-    });
-
-    request.on('row', function(columns){
-        row_id = (columns[0].value);
-    });
-
-    var connection = new Connection(config);
-    connection.on('connect', function(err) {
-        if (err) return console.error(err);
-        connection.execSql(request);
-    });
-};
-
-var createPref = function(data, callback){
-    var requestString = "";
-    
-    requestString = requestString + "insert into preferences (allergies, dislikes, likes, favouriteRecipes, vegetarian, nutritionPreferences, flavourPreferences) values(";
-    requestString = requestString + "@allergies, @dislikes, @likes, @favouriteRecipes,";
-    requestString = requestString + "(select vegId from vegLookup where vegName='" + data.vegOption + "'),";
-    requestString = requestString + "(select nutritionId from nutritionLookup where nutritionType='" + data.nutritionPref +"'),";
-    requestString = requestString + "@flavourPrefId";
-    requestString = requestString + "); SELECT @@identity;";
-
-    var row_id = undefined;
-
-    var request = new Request(requestString, function(err, rowCount, rows){
-        var status = "";
-        if(err){
-            connection.close();
-            status = err;
-            callback(status)
-        } else {
-            //make sure to close the connection before the callback
-            connection.close();
-            status = "success";
-            callback(status, row_id);   
-        }
-
-    });
-
-    request.on('row', function(columns){
-        row_id = (columns[0].value);
-    });
-
-    //add variable parameters
-    request.addParameter('allergies',TYPES.VarChar, data.allergies );
-    request.addParameter('dislikes', TYPES.VarChar, data.dislikes);
-    request.addParameter('likes', TYPES.VarChar, data.likes);
-    request.addParameter('favouriteRecipes', TYPES.VarChar, data.favouriteRecipes);
-    request.addParameter('flavourPrefId', TYPES.Int, data.flavPrefId);
-
-    var connection = new Connection(config);
-    connection.on('connect', function(err) {
-        if (err) return console.error(err);
-        connection.execSql(request);
-    });
-};
-
 var createUser = function(userData, callback){
     var requestString = "";
     requestString = requestString + "insert into users (firstName, lastName, userName, password, preferences) values(";
@@ -179,10 +97,34 @@ var getUserByUserName = function(username, callback){
 
 };
 
+var getUserById = function(userId, callback){
+    var requestString = "select * from users where id='" + userId +"';"
+
+    var request = new Requeset(requestString, function(err, rowCount, rows){
+        var status = undefined;
+        if(err){
+            connection.close();
+            status = err;
+            callback(status, rowCount, rows)
+        } else {
+            connection.close();
+            status = "success";
+            callback(status, rowCount, rows)
+        }
+    });
+
+    var connection = new Connection(config);
+    connection.on('connect', function(err){
+        if (err) callback(err);
+        connection.execSql(request);
+    });
+};
+
+
+
 module.exports = {
-    createflavourPref: createflavourPref,
-    createPref: createPref,
     createUser: createUser,
     checkUserName: checkUserName,
-    getUserByUserName: getUserByUserName
-}
+    getUserByUserName: getUserByUserName,
+    getUserById: getUserById
+};
