@@ -1,4 +1,6 @@
 var userApi = require('../db/userApi');
+var preferencesApi = require('../db/preferencesApi');
+var flavourPrefApi = require('../db/flavourPrefApi');
 
 
 var newUser = function(data, callback){
@@ -18,14 +20,14 @@ var newUser = function(data, callback){
     
     userApi.checkUserName(data.userName, function(isUnique){
         if(isUnique){
-            userApi.createflavourPref(data, function(status,row_id) {
+            flavourPrefApi.createflavourPref(data, function(status,row_id) {
                 if (status != "success") {
                     callback(returnError(status));
                 }
                 //pass in the id of the flavour pref table into the userData object
                 data.flavPrefId = row_id;
                 //pass the flavour pref table id into preferences
-                userApi.createPref(data, function (status, row_id) {
+                preferencesApi.createPref(data, function (status, row_id) {
                     if (status != "success") {
                         callback(returnError(status));
                     }
@@ -80,7 +82,7 @@ var getUser = function(req,res, next){
             if(count > 0){
                 var userObject = user[0];
                 req.user = userObject;
-                req.session.user_id = userObject[0].value;
+                req.session.userId = userObject[0].value;
                 req.session.userName = userObject[3].value;
                 req.session.name = userObject[1].value + " " + userObject[2].value;
                 res.locals.user = userObject;
@@ -111,4 +113,4 @@ module.exports = {
     checkUser: checkUser,
     getUser: getUser,
     logoutUser: logoutUser
-}
+};

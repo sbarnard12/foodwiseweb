@@ -11,9 +11,10 @@ var login = function(){
 		method: "post",
         data: $('#login').serialize(),
         success: function(result){
-            window.location = "http://localhost:3000/searchRecipes";
+            if(result == "success"){
+                window.location = "http://localhost:3000/searchRecipes";
+            }
         }
-
 	})
 }
 var newUserPage = function(){
