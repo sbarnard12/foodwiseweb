@@ -1,10 +1,11 @@
 $(function(){
-	$('#signup_button').on('click', newLogin);
+    $('#signup_button').on('click', newLogin);
 });
 
 var newLogin = function(){
-	event.preventDefault();
+    event.preventDefault();
 
+<<<<<<< Updated upstream
 	$.ajax({
 		url: 'signup',
 		method: 'post',
@@ -15,6 +16,18 @@ var newLogin = function(){
             }
 		}
 	})
+=======
+    $.ajax({
+        url: 'signup',
+        method: 'post',
+        data: $('#signup').serialize(),
+        success: function(result){
+            if(result == "success"){
+                login();
+            }
+        }
+    })
+>>>>>>> Stashed changes
 };
 
 var login = function(){

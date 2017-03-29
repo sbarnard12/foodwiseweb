@@ -1,10 +1,30 @@
-<h1>Log in, nerd</h1>
-<form id="login">
-    <label for="userName">username</label>
-    <input type="text" name="userName">
-    <label for="password">password</label>
-    <input type="text" name="password">
-</form>
-<button id="loginButton">Login</button>
-<button id="newUser">New user</button>
+<div class="body-container">
+    <div class="body-content-container">
+        <h1>Log in</h1>
+        <form id="login">
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label for="userName">Username</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="userName" class="form-control" placeholder="Username">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label for="password">Password</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="password" class="form-control" placeholder="Password">
+                </div>
+            </div>
+        </form>
+        <div class="row" style="padding-top: 20px">
+            <div class="col-md-4">
+                <button id="loginButton">Login</button>
+                <button id="newUser">New user</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/javascripts/loginScript.js"></script>
