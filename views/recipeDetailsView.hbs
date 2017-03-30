@@ -4,23 +4,33 @@
             <img src = {{recipe.images.[0].hostedLargeUrl}}>
         </div>
         <div class="row">
-            {{recipe.name}}
+            <h4>{{recipe.name}}</h4>
         </div>
         <div class="row">
-            <table>
+            <table class="table table-striped">
                 <tr>
-                    <th>Item</th>
-                    <th>On Sale</th>
+                    <th>Ingredient Item</th>
+                    <th>At Home?</th>
+                    <th>On Sale?</th>
                 </tr>
                 {{#each recipe.ingredientLines}}
                     <tr>
                         <td>{{this}}</td>
+                    <!--If not a home ingredient:-->
+                        <td><i class="material-icons" style="color:red">close</i></td>
+                    <!--If a home ingredient:
+                        <td><i class="material-icons" style="color:green">check</i></td>-->
+
+                    <!--If not on sale:
+                        <td><i class="material-icons" style="color:red">close</i></td>-->
+                    <!--If on sale:-->
+                        <td><i class="material-icons" style="color:green">check</i></td>
                     </tr>
                 {{/each}}
             </table>
         </div>
         <div class="row">
-            <a href="{{recipe.source.sourceRecipeUrl}}">Go to site with directions</a>
+            <a class="btn btn-default" href="{{recipe.source.sourceRecipeUrl}}">Visit site for directions</a>
         </div>
     </div>
 </div>

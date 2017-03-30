@@ -1,18 +1,25 @@
 <div class="body-container">
     <div class="body-content-container">
         <form id="searchForm">
-            <label for="search">Search: </label>
-            <input type="text" name="search" id="search">
-            <input id="submit_button" type="submit">
-        <div class="row">
-            <input id="useUserPref" name="usePref" type="radio" value="userPref" checked="checked"> Use my saved Preferences
-            <input id="useNewPref" name="usePref" type="radio" value="useNewPref"> Set new preferences for this Search
+            <h4>Recipe Search:</h4>
+            <div class="row form-group">
+                <div class="col-md-8">
+                    <input type="text" name="search" class="form-control" placeholder="Enter recipe keywords here..." id="search">
+                </div>
+                <input type="submit" class="btn btn-default" id="submit_button">
+            </div>
+        <div class="row form-group">
+            <div class="col-md-5">
+                <input id="useUserPref" name="usePref" type="radio" value="userPref" checked="checked"> Use my saved preferences
+            </div>
+            <div class="col-md-5">
+                <input id="useNewPref" name="usePref" type="radio" value="useNewPref"> Set new preferences for this search
+            </div>
         </div>
-
         <div id="setNewPref" style="display:none">
             <div class="row form-group">
                 <div class="col-md-2">
-                    <label for="allergies">Any allergies?</label>
+                    <label for="allergies">Select your allergies:</label>
                 </div>
                 <div class="col-md-3">
                     <input type="checkbox" name="allergies" value="Peanut-Free"> Peanuts
@@ -26,23 +33,22 @@
                 </div>
                 <div class="col-md-3">
                     <input type="checkbox" name="allergies" value="Sulfite-Free"> Sulfite
-                    <br><input type="checkbox" name="allergies" value="Tree Nut-Free"> Tree Nut
+                    <br><input type="checkbox" name="allergies" value="Tree Nut-Free"> Tree Nuts
                     <br><input type="checkbox" name="allergies" value="Wheat-Free"> Wheat
                 </div>
             </div>
-
             <div class="row form-group">
                 <div class="col-md-2">
                     <label for="vegOption">Vegetarian option?</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="vegOption" value="Non-Vegetarian" checked="checked"> None (Meat-eater)
                 </div>
                 <div class="col-md-3">
                     <input type="radio" name="vegOption" value="Vegetarian"> Vegetarian
                 </div>
                 <div class="col-md-3">
                     <input type="radio" name="vegOption" value="Vegan"> Vegan
-                </div>
-                <div class="col-md-3">
-                    <input type="radio" name="vegOption" value="Non-Vegetarian" checked="checked"> None (meat eater)
                 </div>
             </div>
             <h4>Food Preferences (if no answer, leave blank):</h4>
@@ -152,8 +158,7 @@
             </div>
         </div>
         </form>
-    </div>
-    <div class="body-content-container">
+        <h4 id="searchResultsLabel" style="display:none">Search Results:</h4>
         <div id="searchResults">
 
         </div>

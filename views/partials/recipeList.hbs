@@ -1,18 +1,17 @@
 <div id="recipeList">
     {{#each recipeList}}
-
-        <div class="row">
+        <div class="row form-group">
             <span style="display:none">{{this.id}}</span>
             <div class="col-lg-4">
                 <img src="{{this.smallImageUrls.[0]}}" style="height:100%;width:100%">
             </div>
             <div class="col-lg-6">
                 <div class="row">
-                    {{this.recipeName}}
+                    <h4>{{this.recipeName}}</h4>
                 </div>
             </div>
             <div class="col-lg-2">
-                <button name="recipeDetails">Details</button>
+                <button name="recipeDetails" class="btn btn-default">Details</button>
             </div>
         </div>
     {{/each}}

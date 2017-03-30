@@ -1,5 +1,7 @@
 $(function(){
     $('#signup_button').on('click', newLogin);
+    $('#allergiesFalse').on('change', function(){$("#allergiesList").css("display", "none")});
+    $('#allergiesTrue').on('change', function(){$('#allergiesList').removeAttr('style')});
 });
 
 var newLogin = function(){
