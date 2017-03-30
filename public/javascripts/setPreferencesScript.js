@@ -10,6 +10,9 @@ var updatePref = function(){
         method: 'POST',
         data: $('#updatePref').serialize(),
         success: function(result){
+            if(result.status == "success"){
+                alert("your preferences have been updated")
+            }
             console.log(result);
         }
     })

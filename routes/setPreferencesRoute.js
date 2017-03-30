@@ -9,8 +9,8 @@ router.get('/', function(req, res, next) {
     });
 });
 router.post('/', function(req,res,next){
-    preferencesService.updatePreferences(req, function(status, result){
-        res.send(status);
+    preferencesService.updatePreferences(req, function(result){
+        res.send(result);
     });
 });
 

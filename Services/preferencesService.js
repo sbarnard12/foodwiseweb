@@ -34,10 +34,15 @@ var getPreferencesbyUserId = function(userId, callback) {
 var updatePreferences = function(request, callback){
     var data = request.body;
     data.userId = request.session.userId;
+
+    if (typeof data.allergies == 'object'){
+        data.allergies = data.allergies.join(",");
+    }
     
-    preferencesApi.updatePreferences(data.userId, data, function(){
-        
-    })
+    preferencesApi.updatePreferences(data.userId, data, function(status, count, result){
+        var feedback = {status: status, count: count, result: result};
+        callback(feedback);
+    });
     
 };
 

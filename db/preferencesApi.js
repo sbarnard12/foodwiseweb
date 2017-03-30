@@ -130,13 +130,12 @@ var getAllRelevantPreferencesByUserId = function(userId, callback){
 };
 
 var updatePreferences = function(prefId, data, callback){
-    var requestString = "update preferences " +
-        "set allergies = @allergies, " +
-        "set dislikes = @dislikes, " +
-        "set likes = @likes, " +
-        "set vegetarian = (select vegId from vegLookup where vegName='" + data.vegOption + "')," +
-        "set nutritionPreferences = (select nutritionId from nutritionLookup where nutritionType='" + data.nutritionPref +"')," +
-        "where id='" + prefId + "';";
+    var requestString = "update p set " +
+        "p.allergies = @allergies, p.dislikes = @dislikes, " +
+        "p.likes = @likes, p.vegetarian = v.vegId, p.nutritionPreferences = n.nutritionId " +
+        "from preferences p join vegLookup v on @vegetarian = v.vegName " +
+        "join nutritionLookup n on @nutrition = n.nutritionType " +
+        "where p.id= @prefId;";
 
     var request = new Request(requestString, function(err, rowCount, rows){
         var status = "";
@@ -154,6 +153,9 @@ var updatePreferences = function(prefId, data, callback){
     request.addParameter('allergies',TYPES.VarChar, data.allergies );
     request.addParameter('dislikes', TYPES.VarChar, data.dislikes);
     request.addParameter('likes', TYPES.VarChar, data.likes);
+    request.addParameter('vegetarian', TYPES.VarChar, data.vegOption);
+    request.addParameter('nutrition', TYPES.VarChar, data.nutritionPref);
+    request.addParameter('prefId', TYPES.Int, prefId);
     
     var connection = new Connection(config);
     connection.on('connect', function(err) {
