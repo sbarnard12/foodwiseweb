@@ -15,6 +15,10 @@ var newLogin = function(){
             if(result == "success"){
                 login();
             }
+            else{
+                $('#errorMsg').html(result.error);
+                document.getElementById("errorMsg").scrollIntoView(false);
+            }
 		}
 	})
 };

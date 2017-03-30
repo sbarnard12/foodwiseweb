@@ -49,7 +49,7 @@ var newUser = function(data, callback){
         } else {
             var result = {};
             result.status = "fail";
-            result.error = "username already exists";
+            result.error = "Username already exists.";
 
             callback(result);
         }
@@ -72,10 +72,10 @@ var checkUser = function(req, user, callback){
                 req.session.name = userObject[1].value + " " + userObject[2].value;
                 callback("success");
             } else { //wrong password
-                callback("Invalid username or password");
+                callback("Invalid username or password.");
             }
         } else {
-            callback("Invalid username or password");
+            callback("Invalid username or password.");
         }
     });
 };
