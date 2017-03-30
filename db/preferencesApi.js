@@ -132,6 +132,30 @@ var getAllRelevantPreferencesByUserId = function(userId, callback){
     });
 };
 
+var updatePreferences = function(prefId, callback){
+    var requestString = "update preferences " +
+        "set allergies = @allergies, " +
+        "set dislikes = @dislikes, " +
+        "set likes = @likes, " +
+        "set favouriteRecipes = @favrecipes, " +
+        "set vegetarian = @vegOption, " +
+        "set nutritionPreferences = @nutritionPref, " +
+        "where id='" + prefId + "';";
+
+    var request = new Request(requestString, function(err, rowCount, rows){
+        var status = "";
+        if(err){
+            connection.close();
+            status = err;
+            callback(status);
+        } else {
+            connection.close();
+            status = "success";
+            callback(status);
+        }
+    })
+};
+
 var crazyJoinString = "select u.userName as username, p.id, p.allergies, p.dislikes, p.likes, v.vegName, n.nutritionType, t1.flavourTypeName as salty, t2.flavourTypeName as sweet, t3.flavourTypeName as bitter, t4.flavourTypeName as meaty, t5.flavourTypeName as spicy " +
 " from users u" +
 " join preferences p On u.preferences = p.id join vegLookup v On p.vegetarian = v.vegId " +
