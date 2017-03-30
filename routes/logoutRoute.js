@@ -10,7 +10,6 @@ router.route('/')
             res.render('login');
         });
     })
-
 ;
 
 module.exports = router;

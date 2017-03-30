@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req,res,next){
     preferencesService.savenew(req, function(){});
-})
+});
 
 module.exports = router;
 /**
