@@ -8,9 +8,10 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/:ingredientsTerm', function(req, res, next) {
+router.post('/', function(req, res, next) {
 	//req.session.user
-    homeIngredientsService.setHomeIngredients(req.body, function(result){
+    homeIngredientsService.setHomeIngredients(req, function(result){
+        console.log("result printed in route"+ result);
         res.send(result);
     });
 });

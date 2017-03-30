@@ -14,6 +14,9 @@ var login = function(){
             if(result == "success"){
                 window.location = "http://localhost:3000/searchRecipes";
             }
+            else{
+                $('#errorMsg').html(result);
+			}
         }
 	})
 }
