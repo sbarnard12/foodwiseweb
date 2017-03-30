@@ -15,7 +15,19 @@ var submitSearch = function(event){
         data: data = $('#searchForm').serialize(),
         success: function(result){
             $('#searchResults').html(result);
+            setDetailsButtons();
         }
+    })
+};
+
+var setDetailsButtons = function(){
+    $('button[name=recipeDetails]').each(function(index, item){
+        $(this).on('click', function(){
+            event.preventDefault();
+            var recipeId = $(this).closest('.row').children().first().text();
+            var url = "http://" +  window.location.host + "/recipeDetails/" + recipeId;
+            window.location = (url);
+        })
     })
 };
 

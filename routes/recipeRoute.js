@@ -5,8 +5,8 @@ var flyerService = require('../Services/recipeService.js');
 /* GET search page for recipes. */
 router.route('/')
     .get(function(req, res, next) {
-        flyerService.getAll(function(results){
-            res.send(results);
+        flyerService.getSearch(req, function(results){
+            res.render('partials/recipeList', {recipeList: results.matches, layout:false});
         });
     })
 ;

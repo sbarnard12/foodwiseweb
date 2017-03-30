@@ -10,37 +10,51 @@ var options = {
     path: '/v1/api/recipes?_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4&maxResult=10&start=1'
 };
 
-var getAll = function(callback){
-    sendRequest(function(results){
+var getOneOptions = {
+    host: "api.yummly.com",
+    path: "/v1/api/recipe/"
+};
+var apikey = "_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4";
+
+/* var getAll = function(callback){
+    sendRequest(true, function(results){
         callback(results);
     });
-};
+}; */
 
 var getSearch = function(request, callback){
     //set query search term
-    var searchString = parseSearch(request.params.searchterm);
-    
-    var userId = request.session.userId;
-    
-    getPreferences(userId, request.query, function(preferences){
-        var allergyString = parseAllergyString(preferences[2].value);
-        //var dislikesString = parseDislikes(preferences[3].value);
-        //var likesString = parseLikesString(preferences[4].value);
-        var vegString = parseVegString(preferences[5].value);
-        //var parseNutrition = parseNutrition(preferences[6].value);
-        var flavourString = parseFlavour(preferences[7].value, preferences[8].value, preferences[9].value, preferences[10].value, preferences[11].value);
 
-        options.path = options.path + searchString;
-        options.path = options.path + allergyString;
-        //options.path = options.path + dislikesString;
-        //options.path = options.path + likesString;
-        options.path = options.path + vegString;
-        //options.path = options.path + parseNutrition;
-        options.path = options.path + flavourString;
-        sendRequest(function(results){
+    if(typeof request.params.searchterm == "undefined"){ //search all
+        sendRequest(true, function(results){
             callback(results);
         });
-    });
+    } else {
+
+        var searchString = parseSearch(request.params.searchterm);
+
+        var userId = request.session.userId;
+
+        getPreferences(userId, request.query, function(preferences){
+            var allergyString = parseAllergyString(preferences[2].value);
+            //var dislikesString = parseDislikes(preferences[3].value);
+            //var likesString = parseLikesString(preferences[4].value);
+            var vegString = parseVegString(preferences[5].value);
+            //var parseNutrition = parseNutrition(preferences[6].value);
+            var flavourString = parseFlavour(preferences[7].value, preferences[8].value, preferences[9].value, preferences[10].value, preferences[11].value);
+
+            options.path = options.path + searchString;
+            options.path = options.path + allergyString;
+            //options.path = options.path + dislikesString;
+            //options.path = options.path + likesString;
+            options.path = options.path + vegString;
+            //options.path = options.path + parseNutrition;
+            options.path = options.path + flavourString;
+            sendRequest(true, function(results){
+                callback(results);
+            });
+        });
+    }
     
 
 };
@@ -51,7 +65,7 @@ var parseSearch = function(string){
     return "&q=" + newString;
 };
 
-var sendRequest = function(callback){
+var sendRequest = function(config1, callback){
     var responseFunc = function(response) {
         var str = '';
 
@@ -66,7 +80,11 @@ var sendRequest = function(callback){
             callback(test);
         });
     };
-    http.request(options, responseFunc).end();
+    if(config1){
+        http.request(options, responseFunc).end();
+    } else {
+        http.request(getOneOptions, responseFunc).end();
+    }
 };
 
 var getPreferences = function(userId, formData, callback){
@@ -149,7 +167,16 @@ var parseFlavour = function(salty, sweet, bitter, meaty, spicy){
     return flavourString;
 };
 
+var getOne = function(recipeId, callback){
+    getOneOptions.path = getOneOptions.path + recipeId + "?" + apikey;
+
+    sendRequest(false, function(results){
+        callback(results);
+    });
+};
+
 module.exports = {
-    getAll: getAll,
-    getSearch: getSearch
+    //getAll: getAll,
+    getSearch: getSearch,
+    getOne: getOne
 };

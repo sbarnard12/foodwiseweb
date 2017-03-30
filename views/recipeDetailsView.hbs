@@ -1,0 +1,26 @@
+<div class="body-container">
+    <div class="body-content-container">
+        <div class="row">
+            <img src = {{recipe.images.[0].hostedLargeUrl}}>
+        </div>
+        <div class="row">
+            {{recipe.name}}
+        </div>
+        <div class="row">
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>On Sale</th>
+                </tr>
+                {{#each recipe.ingredientLines}}
+                    <tr>
+                        <td>{{this}}</td>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+        <div class="row">
+            <a href="{{recipe.source.sourceRecipeUrl}}">Go to site with directions</a>
+        </div>
+    </div>
+</div>

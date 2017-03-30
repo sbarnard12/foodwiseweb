@@ -20,6 +20,7 @@ var recipe = require('./routes/recipeRoute');
 var login = require('./routes/loginRoute');
 var signup = require('./routes/signUpRoute');
 var logout = require('./routes/logoutRoute');
+var recipeDetails = require('./routes/recipeDetailsRoute');
 
 var app = express();
 
@@ -76,6 +77,7 @@ app.use('/recipes', recipe);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/logout', logout);
+app.use('/recipeDetails', recipeDetails);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
