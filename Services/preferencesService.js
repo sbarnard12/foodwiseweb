@@ -31,7 +31,18 @@ var getPreferencesbyUserId = function(userId, callback) {
     });
 };
 
+var updatePreferences = function(request, callback){
+    var data = request.body;
+    data.userId = request.session.userId;
+    
+    preferencesApi.updatePreferences(data.userId, data, function(){
+        
+    })
+    
+};
+
 
 module.exports = {
-    getPreferencesbyUserId: getPreferencesbyUserId
+    getPreferencesbyUserId: getPreferencesbyUserId,
+    updatePreferences: updatePreferences
 };

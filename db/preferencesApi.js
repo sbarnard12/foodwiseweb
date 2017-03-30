@@ -129,14 +129,13 @@ var getAllRelevantPreferencesByUserId = function(userId, callback){
     });
 };
 
-var updatePreferences = function(prefId, callback){
+var updatePreferences = function(prefId, data, callback){
     var requestString = "update preferences " +
         "set allergies = @allergies, " +
         "set dislikes = @dislikes, " +
         "set likes = @likes, " +
-        "set favouriteRecipes = @favrecipes, " +
-        "set vegetarian = @vegOption, " +
-        "set nutritionPreferences = @nutritionPref, " +
+        "set vegetarian = (select vegId from vegLookup where vegName='" + data.vegOption + "')," +
+        "set nutritionPreferences = (select nutritionId from nutritionLookup where nutritionType='" + data.nutritionPref +"')," +
         "where id='" + prefId + "';";
 
     var request = new Request(requestString, function(err, rowCount, rows){
@@ -150,7 +149,17 @@ var updatePreferences = function(prefId, callback){
             status = "success";
             callback(status);
         }
-    })
+    });
+
+    request.addParameter('allergies',TYPES.VarChar, data.allergies );
+    request.addParameter('dislikes', TYPES.VarChar, data.dislikes);
+    request.addParameter('likes', TYPES.VarChar, data.likes);
+    
+    var connection = new Connection(config);
+    connection.on('connect', function(err) {
+        if (err) return console.error(err);
+        connection.execSql(request);
+    });
 };
 
 var crazyJoinString = "select u.userName as username, p.id, p.allergies, p.dislikes, p.likes, v.vegName, n.nutritionType, t1.flavourTypeName as salty, t2.flavourTypeName as sweet, t3.flavourTypeName as bitter, t4.flavourTypeName as meaty, t5.flavourTypeName as spicy " +
@@ -167,5 +176,6 @@ module.exports = {
     getPreferencesById: getPreferencesById,
     createPref: createPref,
     getAllRelevantPreferencesByUserId: getAllRelevantPreferencesByUserId,
-    insertIngredients: insertIngredients
+    insertIngredients: insertIngredients,
+    updatePreferences: updatePreferences
 };

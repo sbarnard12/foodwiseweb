@@ -3,9 +3,14 @@ $(function(){
 });
 
 var updatePref = function(){
+    event.preventDefault();
 
     $.ajax({
-        url: ''
+        url: 'setPreferences',
+        method: 'POST',
+        data: $('#updatePref').serialize(),
+        success: function(result){
+            console.log(result);
+        }
     })
-
 };
