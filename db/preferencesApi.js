@@ -33,7 +33,35 @@ var insertIngredients = function(data,callback) {
     requestString +="@homeIngredients) where";
     requestString += "";
 
+    var row_id = undefined;
 
+    var request = new Request(requestString, function(err, rowCount, rows){
+        var status = "";
+        if(err){
+            connection.close();
+            status = err;
+            callback(status)
+        } else {
+            //make sure to close the connection before the callback
+            connection.close();
+            status = "success";
+            callback(status, row_id);
+        }
+
+    });
+
+    request.on('row', function(columns){
+        row_id = (columns[0].value);
+    });
+
+    //add variable parameters
+    request.addParameter('homeIngredients',TYPES.VarChar, data.homeIng.toString());
+
+    var connection = new Connection(config);
+    connection.on('connect', function(err) {
+        if (err) return console.error(err);
+        connection.execSql(request);
+    });
 };
 
 var createPref = function(data, callback){

@@ -1,14 +1,14 @@
 $(function(){
-    $('#submit_button').on('click', submitSearch);
+    $('#submit_button').on('click', setHomeIngredients);
 })
 
-var newLogin = function(){
+var setHomeIngredients = function(){
     event.preventDefault();
 
     $.ajax({
         url: 'homeIngredients',
         method: 'post',
-        data: $('#homeIngredients').serialize(),
+        data: $('#homeIngredientsForm').serialize(),
         success: function(result){
             if(result == "success"){
                 login();

@@ -5,8 +5,10 @@ var preferencesApi = require('../db/preferencesApi');
 var setHomeIngredients= function(data, callback){
     //put the flavours into an object to better access them
 
-    if (data.length<255) {
-        preferencesApi.insertIngredients(data,function(callback))
+    if (data.homeIng.length<255) {
+        preferencesApi.insertIngredients(data,function() {
+
+        });
     } else {
         var result = {};
         result.status = "fail";
@@ -15,10 +17,10 @@ var setHomeIngredients= function(data, callback){
         callback(result);
     }
 
-    data.nutritionPref = "Default";
+    //data.nutritionPref = "Default";
     //create new user
 
-    userApi.checkUserName(data.userName, function(isUnique){
+    /*userApi.checkUserName(data.userName, function(isUnique){
         if(isUnique){
             flavourPrefApi.createflavourPref(data, function(status,row_id) {
                 if (status != "success") {
@@ -43,11 +45,11 @@ var setHomeIngredients= function(data, callback){
                 });
             });
         }
-    });
+    });*/
 };
 
 
 module.exports={
-    homeIngredients: homeIngredients,
+    setHomeIngredients: setHomeIngredients
 };
 
