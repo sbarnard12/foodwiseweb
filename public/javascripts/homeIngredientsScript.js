@@ -2,16 +2,17 @@ $(function(){
     $('#submit_button').on('click', submitSearch);
 })
 
-var submitSearch = function(event){
+var newLogin = function(){
     event.preventDefault();
-    var ingredientsTerm = $('#search').val();
-    var url = 'flyer/' + ingredientsTerm;
+
     $.ajax({
-        url: url,
-        type: 'GET',
+        url: 'homeIngredients',
+        method: 'post',
+        data: $('#homeIngredients').serialize(),
         success: function(result){
-            console.log(result);
+            if(result == "success"){
+                login();
+            }
         }
     })
-
-}
+};

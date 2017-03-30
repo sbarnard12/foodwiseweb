@@ -27,6 +27,14 @@ var getPreferencesById = function(prefId, callback){
     });
 };
 
+var insertIngredients = function(data,callback) {
+    var requestString = "";
+    requestString += "insert into preferences (homeIngredients) values(";
+    requestString +="@homeIngredients) where";
+    requestString += "";
+
+
+};
 
 var createPref = function(data, callback){
     var requestString = "";
@@ -105,5 +113,6 @@ var crazyJoinString = "select u.userName as username, p.id, p.allergies, p.disli
 module.exports = {
     getPreferencesById: getPreferencesById,
     createPref: createPref,
-    getAllRelevantPreferencesByUserId: getAllRelevantPreferencesByUserId
+    getAllRelevantPreferencesByUserId: getAllRelevantPreferencesByUserId,
+    insertIngredients: insertIngredients
 };
