@@ -12,8 +12,8 @@ router.route('/')
 ;
 router.route('/:searchterm')
     .get(function(req,res, next){
-        flyerService.getOne(req, function(results){
-            res.send(results);
+        flyerService.getSearch(req, function(results){
+            res.render('partials/recipeList', {recipeList: results.matches, layout:false});
         })
     })
 

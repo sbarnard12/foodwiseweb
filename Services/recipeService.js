@@ -16,13 +16,13 @@ var getAll = function(callback){
     });
 };
 
-var getOne = function(request, callback){
+var getSearch = function(request, callback){
     //set query search term
     var searchString = parseSearch(request.params.searchterm);
     
     var userId = request.session.userId;
     
-    getPreferences(userId, function(preferences){
+    getPreferences(userId, request.query, function(preferences){
         var allergyString = parseAllergyString(preferences[2].value);
         //var dislikesString = parseDislikes(preferences[3].value);
         //var likesString = parseLikesString(preferences[4].value);
@@ -69,18 +69,44 @@ var sendRequest = function(callback){
     http.request(options, responseFunc).end();
 };
 
-var getPreferences = function(userId, callback){
-    preferencesApi.getAllRelevantPreferencesByUserId(userId, function(status, rowCount, preferences){
-        if(status == "success"){
-            callback(preferences);
+var getPreferences = function(userId, formData, callback){
+    if(formData.usePref == "useNewPref"){ //use newly specified preferences
+        //format them the same as the query would
+        var preferences = ["",""];
+        if(typeof formData.allergies == "object"){
+            preferences.push({"value": formData.allergies.join(",")});
         } else {
-            callback(status);
+            preferences.push({"value": ""});
         }
-    })
+        preferences.push({"value": formData.dislikes});
+        preferences.push({"value": formData.likes});
+        preferences.push({"value": formData.vegOption});
+        preferences.push({"value": formData.nutritionPref});
+        preferences.push({"value": formData.salty});
+        preferences.push({"value": formData.sweet});
+        preferences.push({"value": formData.bitter});
+        preferences.push({"value": formData.savoury});
+        preferences.push({"value": formData.spicy});
+
+        callback(preferences);
+
+    } else { //query database to get user stored preferences
+        preferencesApi.getAllRelevantPreferencesByUserId(userId, function(status, rowCount, preferences){
+            if(status == "success"){
+                callback(preferences);
+            } else {
+                callback(status);
+            }
+        })
+    }
+
 };
 
 var parseAllergyString = function(allergyString){
     var allergies = "";
+    if(typeof allergyString == "undefined" || allergyString.length == 0){
+        return allergies;
+    }
     var split = allergyString.split(",");
     var allergyLookup = recipeLookup.allergies;
     split.forEach(function(item){
@@ -110,15 +136,12 @@ var parseFlavour = function(salty, sweet, bitter, meaty, spicy){
             case "Default":
                 break;
             case "Low":
-                flavourString = flavourString + "&flavor." + index + ".min=0";
                 flavourString = flavourString + "&flavor." + index + ".max=0.33";
                 break;
             case "Medium":
-                flavourString = flavourString + "&flavor." + index + ".min=0.34";
                 flavourString = flavourString + "&flavor." + index + ".max=0.66";
                 break;
             case "High":
-                flavourString = flavourString + "&flavor." + index + ".min=0.67";
                 flavourString = flavourString + "&flavor." + index + ".max=1";
                 break;
         }
@@ -128,5 +151,5 @@ var parseFlavour = function(salty, sweet, bitter, meaty, spicy){
 
 module.exports = {
     getAll: getAll,
-    getOne: getOne
+    getSearch: getSearch
 };

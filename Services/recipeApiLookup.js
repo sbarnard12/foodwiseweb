@@ -14,7 +14,7 @@ var allergies = {
 
 var vegetarian = {
     "Vegan": "386",
-    "Last-ovo Vegetarian": "387"
+    "Lacto-ovo%20vegetarian": "387"
 };
 
 module.exports = {

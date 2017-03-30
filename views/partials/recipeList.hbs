@@ -1,0 +1,19 @@
+<div id="recipeList">
+    {{#each recipeList}}
+
+        <div class="row">
+            <span style="display:none">{{this.id}}</span>
+            <div class="col-lg-4">
+                <img src="{{this.smallImageUrls.[0]}}" style="height:100%;width:100%">
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    {{this.recipeName}}
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <button>Details</button>
+            </div>
+        </div>
+    {{/each}}
+</div>
