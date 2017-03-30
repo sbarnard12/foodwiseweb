@@ -1,94 +1,190 @@
-<h1>Sign Up a new account</h1>
-<div class="container" style="background-color: white">
-	<form id="signup">
-		<div class="row">
-			<label for="firstName">first name</label>
-			<input type="text" name="firstName">
-		</div>
-		<div class="row">
-			<label for="lastName">last name</label>
-			<input type="text" name="lastName">
-		</div>
-		<div class="row">
-			<label for="userName">user name</label>
-			<input id="userName" type="text" name="userName">
-		</div>
-		<div class="row">
-			<label for="password">password</label>
-			<input id="password" type="text" name="password">
-		</div>
+<div class="body-container">
+    <div class="body-content-container">
+        <h1>Create a new account</h1>
+        <div class="row">
+            <div class="col-md-5">
+                <p>*Required Field</p>
+            </div>
+        </div>
+        <form id="signup">
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label for="userName">Username*</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="userName" class="form-control" placeholder="Username">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label for="password">Password*</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="password" class="form-control" placeholder="Password">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label for="firstName">First Name</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="firstName" class="form-control" placeholder="First Name">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label for="lastName">Last Name</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="lastName" class="form-control" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label for="allergies">Any allergies?</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="checkbox" name="allergies" value="Peanut-Free"> Peanuts
+                    <br><input type="checkbox" name="allergies" value="Seafood-Free"> Seafood
+                    <br><input type="checkbox" name="allergies" value="Sesame-Free"> Sesame
+                </div>
+                <div class="col-md-3">
+                    <input type="checkbox" name="allergies" value="Soy-Free"> Soy
+                    <br><input type="checkbox" name="allergies" value="Dairy-Free"> Dairy
+                    <br><input type="checkbox" name="allergies" value="Egg-Free"> Egg
+                </div>
+                <div class="col-md-3">
+                    <input type="checkbox" name="allergies" value="Sulfite-Free"> Sulfite
+                    <br><input type="checkbox" name="allergies" value="Tree Nut-Free"> Tree Nut
+                    <br><input type="checkbox" name="allergies" value="Wheat-Free"> Wheat
+                </div>
+            </div>
 
-		<div class="row">
-			<label for="allergies">any allergies?</label>
-			<input type="checkbox" name="allergies" value="Peanut-Free"> Peanuts
-			<input type="checkbox" name="allergies" value="Seafood-Free"> Seafood
-			<input type="checkbox" name="allergies" value="Sesame-Free"> Sesame
-			<input type="checkbox" name="allergies" value="Soy-Free"> Soy
-			<input type="checkbox" name="allergies" value="Dairy-Free"> Dairy
-			<input type="checkbox" name="allergies" value="Egg-Free"> Egg
-			<input type="checkbox" name="allergies" value="Sulfite-Free"> Sulfite
-			<input type="checkbox" name="allergies" value="Tree Nut-Free"> Tree Nuts
-			<input type="checkbox" name="allergies" value="Wheat-Free"> Wheat
-		</div>
-
-		<div class="row">
-			<label for="vegOption">Vegetarian option</label>
-			<input type="radio" name="vegOption" value="Vegetarian"> Vegetarian
-			<input type="radio" name="vegOption" value="Vegan"> Vegan
-			<input type="radio" name="vegOption" value="Non-Vegetarian" checked="checked"> None (meat eater)
-		</div>
-        <h3>If no answer, leave blank: </h3>
-		<div class="row">
-			<label for="dislikes">Any significant food dislikes?</label>
-			<input type="text" name="dislikes">
-		</div>
-		<div class="row">
-			<label for="likes">Which foods do you love?</label>
-			<input type="text" name="likes">
-		</div>
-
-		<div class="row">
-			<label for="nutritionPref">Any nutrition preferences?</label>
-			<input type="text" name="nutritionPref">
-		</div>
-        <h3>How do you like your food?</h3>
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label for="vegOption">Vegetarian option?</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="vegOption" value="Vegetarian"> Vegetarian
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="vegOption" value="Vegan"> Vegan
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="vegOption" value="Non-Vegetarian" checked="checked"> None (meat eater)
+                </div>
+            </div>
+            <h4>Food Preferences (if no answer, leave blank):</h4>
+            <div class="row form-group">
+                <div class="col-md-10">
+                    <label for="dislikes">Which foods do you dislike/avoid?</label>
+                    <input type="text" name="dislikes" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-10">
+                    <label for="likes">Which foods do you love?</label>
+                    <input type="text" name="likes" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-10">
+                    <label for="nutritionPref">Any nutrition preferences?</label>
+                    <input type="text" name="nutritionPref" class="form-control">
+                </div>
+            </div>
+            <h4>How do you like your food?</h4>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="salty">Salty</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="salty" value="Default" checked="checked"> No Preference
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="salty" value="Low"> Low
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="salty" value="Medium"> Medium
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="salty" value="High"> High
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="sweet">Sweet</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="sweet" value="Default" checked="checked"> No Preference
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="sweet" value="Low"> Low
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="sweet" value="Medium"> Medium
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="sweet" value="High"> High
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="bitter">Bitter</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="bitter" value="Default" checked="checked"> No Preference
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="bitter" value="Low"> Low
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="bitter" value="Medium"> Medium
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="bitter" value="High"> High
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="savoury">Savoury</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="savoury" value="Default" checked="checked"> No Preference
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="savoury" value="Low"> Low
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="savoury" value="Medium"> Medium
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="savoury" value="High"> High
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="spicy">Spicy</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="radio" name="spicy" value="Default" checked="checked"> No Preference
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="spicy" value="Low"> Low
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="spicy" value="Medium"> Medium
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="spicy" value="High"> High
+                </div>
+            </div>
+        </form>
         <div class="row">
-            <label for="salty">salty</label>
-            <input type="radio" name="salty" value="Default" checked="checked"> No Preference
-            <input type="radio" name="salty" value="Low"> Low
-            <input type="radio" name="salty" value="Medium"> Medium
-            <input type="radio" name="salty" value="High"> High
+            <div class="col-md-2" style="padding-top: 20px">
+                <button id="signup_button">Submit!</button>
+            </div>
         </div>
-        <div class="row">
-            <label for="sweet">Sweet</label>
-            <input type="radio" name="sweet" value="Default" checked="checked"> No Preference
-            <input type="radio" name="sweet" value="Low"> Low
-            <input type="radio" name="sweet" value="Medium"> Medium
-            <input type="radio" name="sweet" value="High"> High
-        </div>
-        <div class="row">
-            <label for="bitter">Bitter</label>
-            <input type="radio" name="bitter" value="Default" checked="checked"> No Preference
-            <input type="radio" name="bitter" value="Low"> Low
-            <input type="radio" name="bitter" value="Medium"> Medium
-            <input type="radio" name="bitter" value="High"> High
-        </div>
-        <div class="row">
-            <label for="meaty">Savory</label>
-            <input type="radio" name="meaty" value="Default" checked="checked"> No Preference
-            <input type="radio" name="meaty" value="Low"> Low
-            <input type="radio" name="meaty" value="Medium"> Medium
-            <input type="radio" name="meaty" value="High"> High
-        </div>
-        <div class="row">
-            <label for="spicy">Spicy</label>
-            <input type="radio" name="spicy" value="Default" checked="checked"> No Preference
-            <input type="radio" name="spicy" value="Low"> Low
-            <input type="radio" name="spicy" value="Medium"> Medium
-            <input type="radio" name="spicy" value="High"> High
-        </div>
-	</form>
-	<button id="signup_button">Submit!</button>
+    </div>
 </div>
-
 <script src="/javascripts/signUpScript.js"></script>

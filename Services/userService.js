@@ -9,13 +9,17 @@ var newUser = function(data, callback){
         salty: data.salty,
         sweet: data.sweet,
         bitter: data.bitter,
-        meaty: data.meaty
+        meaty: data.savoury,
+        spicy: data.spicy
     };
     if(typeof data.allergies == 'object'){
        data.allergies = data.allergies.join(","); 
+    } else if(typeof data.allergies == 'undefined'){
+        data.allergies = " ";
     }
 
     data.nutritionPref = "Default";
+    data.favouriteRecipes = "test";
     //create new user
     
     userApi.checkUserName(data.userName, function(isUnique){

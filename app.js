@@ -16,10 +16,11 @@ var searchRecipes = require('./routes/searchRecipes');
 var viewSales = require('./routes/viewSales');
 var homeIngredients = require('./routes/homeIngredientsRoute');
 var setPreferences = require('./routes/setPreferences');
-var flyer = require('./routes/flyerRoute');
+var recipe = require('./routes/recipeRoute');
 var login = require('./routes/loginRoute');
 var signup = require('./routes/signUpRoute');
 var logout = require('./routes/logoutRoute');
+var recipeDetails = require('./routes/recipeDetailsRoute');
 
 var app = express();
 
@@ -72,10 +73,11 @@ app.use('/searchRecipes', searchRecipes);
 app.use('/viewSales', viewSales);
 app.use('/homeIngredients', homeIngredients);
 app.use('/setPreferences', setPreferences);
-app.use('/flyer', flyer);
+app.use('/recipes', recipe);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/logout', logout);
+app.use('/recipeDetails', recipeDetails);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

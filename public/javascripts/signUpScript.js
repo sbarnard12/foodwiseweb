@@ -1,9 +1,9 @@
 $(function(){
-	$('#signup_button').on('click', newLogin);
+    $('#signup_button').on('click', newLogin);
 });
 
 var newLogin = function(){
-	event.preventDefault();
+    event.preventDefault();
 
 	$.ajax({
 		url: 'signup',

@@ -1,17 +1,33 @@
 $(function(){
     $('#submit_button').on('click', submitSearch);
+    $('#useUserPref').on('change', function(){$("#setNewPref").css("display", "none")});
+    $('#useNewPref').on('change', function(){$('#setNewPref').removeAttr('style')});
 })
 
 var submitSearch = function(event){
     event.preventDefault();
     var searchterm = $('#search').val();
-    var url = 'flyer/' + searchterm;
+    var url = 'recipes/' + searchterm;
+
     $.ajax({
         url: url,
         type: 'GET',
+        data: data = $('#searchForm').serialize(),
         success: function(result){
-            console.log(result);
+            $('#searchResults').html(result);
+            setDetailsButtons();
         }
     })
+};
 
-}
+var setDetailsButtons = function(){
+    $('button[name=recipeDetails]').each(function(index, item){
+        $(this).on('click', function(){
+            event.preventDefault();
+            var recipeId = $(this).closest('.row').children().first().text();
+            var url = "http://" +  window.location.host + "/recipeDetails/" + recipeId;
+            window.location = (url);
+        })
+    })
+};
+
