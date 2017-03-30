@@ -10,7 +10,7 @@ router.route('/')
     })
     .post(function(req,res,next){
         userService.checkUser(req, req.body, function(result){
-            res.send('success');
+            res.send(result);
         });
     })
 ;

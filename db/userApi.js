@@ -78,7 +78,12 @@ var getUserByUserName = function(username, callback){
             connection.close();
             status = err;
             callback(status)
-        } else {
+        } else if (rowCount == 0){
+            connection.close();
+            status = "Invalid user";
+            callback(status);
+        }
+        else {
             connection.close();
             status = "success";
             callback(status, rowCount, rows)

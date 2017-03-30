@@ -72,10 +72,10 @@ var checkUser = function(req, user, callback){
                 req.session.name = userObject[1].value + " " + userObject[2].value;
                 callback("success");
             } else { //wrong password
-                callback("invalid username or password");
+                callback("Invalid username or password");
             }
         } else {
-            callback("invalid username or password");
+            callback("Invalid username or password");
         }
     });
 };
