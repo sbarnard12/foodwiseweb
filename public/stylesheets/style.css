@@ -5816,7 +5816,8 @@ button.close {
 
 body {
   background: #0c0a0f no-repeat fixed center center;
-  background-image: url("http://www.tokkoro.com/picsup/471109-fruit-wallpaper-desktop.jpg"); }
+  background-size: 100%;
+  background-image: url("http://lh5.googleusercontent.com/MCN9S7wOtMeKx35rDJrdoSuoz6MAF99bVHPwm7g85L4MPEQopzdhqETFTMBvYABe-sFpXqblv4TTEhA=w1366-h604"); }
 
 .header, .footer {
   background-color: #339933;
@@ -5846,3 +5847,6 @@ body {
   min-height: 100px;
   margin: auto;
   padding: 25px; }
+
+img {
+  margin: auto; }

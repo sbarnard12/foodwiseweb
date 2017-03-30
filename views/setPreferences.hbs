@@ -1,10 +1,11 @@
 <div class="body-container">
     <div class="body-content-container">
+        <h2>Set Preferences</h2>
         <form id="updatePref">
             <div>
                 <div class="row form-group">
                     <div class="col-md-2">
-                        <label for="allergies">Any allergies?</label>
+                        <label for="allergies">Select your allergies:</label>
                     </div>
                     <div class="col-md-3">
                         <input type="checkbox" name="allergies" value="Peanut-Free" {{#ifIn "Peanut-Free" preferences.allergies}} checked {{/ifIn}}> Peanuts
@@ -18,23 +19,22 @@
                     </div>
                     <div class="col-md-3">
                         <input type="checkbox" name="allergies" value="Sulfite-Free" {{#ifIn "Sulfite-Free" preferences.allergies}} checked {{/ifIn}}> Sulfite
-                        <br><input type="checkbox" name="allergies" value="Tree Nut-Free" {{#ifIn "Tree Nut-Free" preferences.allergies}} checked {{/ifIn}}> Tree Nut
+                        <br><input type="checkbox" name="allergies" value="Tree Nut-Free" {{#ifIn "Tree Nut-Free" preferences.allergies}} checked {{/ifIn}}> Tree Nuts
                         <br><input type="checkbox" name="allergies" value="Wheat-Free" {{#ifIn "Wheat-Free" preferences.allergies}} checked {{/ifIn}}> Wheat
                     </div>
                 </div>
-
                 <div class="row form-group">
                     <div class="col-md-2">
                         <label for="vegOption">Vegetarian option?</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="radio" name="vegOption" value="Non-Vegetarian" {{#if_eq preferences.vegString "Non-Vegetarian"}} checked {{/if_eq}}> None (Meat-eater)
                     </div>
                     <div class="col-md-3">
                         <input type="radio" name="vegOption" value="Vegetarian" {{#if_eq preferences.vegString "Vegetarian"}} checked {{/if_eq}}> Vegetarian
                     </div>
                     <div class="col-md-3">
                         <input type="radio" name="vegOption" value="Vegan" {{#if_eq preferences.vegString "Vegan"}} checked{{/if_eq}}> Vegan
-                    </div>
-                    <div class="col-md-3">
-                        <input type="radio" name="vegOption" value="Non-Vegetarian" {{#if_eq preferences.vegString "Non-Vegetarian"}} checked {{/if_eq}}> None (meat eater)
                     </div>
                 </div>
                 <h4>Food Preferences (if no answer, leave blank):</h4>
@@ -144,6 +144,10 @@
                 </div>
             </div>
         </form>
-        <button id="updatePrefButton">Update Preferences</button>
+        <div class="row">
+            <div class="col-md-2" style="padding-top: 20px">
+                <button class="btn btn-default" id="updatePrefButton">Update</button>
+            </div>
+        </div>
     </div>
 </div>
