@@ -2,12 +2,19 @@ var userApi = require('../db/userApi');
 var preferencesApi = require('../db/preferencesApi');
 
 
-var setHomeIngredients= function(data, callback){
+var setHomeIngredients= function(req, callback){
     //put the flavours into an object to better access them
 
+    var data=req.body;
+    data.user_id=req.session.userId;
+    console.log("inside sethomeing in service file. Userid is "+data.user_id);
     if (data.homeIng.length<255) {
-        preferencesApi.insertIngredients(data,function() {
-
+        preferencesApi.insertIngredients(data,function(status) {
+            if(status == "success"){
+                callback(status);
+            } else {
+                callback(returnError(status));
+            }
         });
     } else {
         var result = {};

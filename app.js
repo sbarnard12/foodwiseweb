@@ -15,6 +15,7 @@ var users = require('./routes/users');
 var searchRecipes = require('./routes/searchRecipes');
 var viewSales = require('./routes/viewSales');
 var homeIngredients = require('./routes/homeIngredientsRoute');
+//C:\wamp\NodeJS\322_project\routes\homeIngredientsRoute.js
 var setPreferences = require('./routes/setPreferences');
 var recipe = require('./routes/recipeRoute');
 var login = require('./routes/loginRoute');

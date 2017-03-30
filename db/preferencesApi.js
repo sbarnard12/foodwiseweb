@@ -29,9 +29,9 @@ var getPreferencesById = function(prefId, callback){
 
 var insertIngredients = function(data,callback) {
     var requestString = "";
-    requestString += "insert into preferences (homeIngredients) values(";
-    requestString +="@homeIngredients) where";
-    requestString += "";
+    requestString += "update preferences set homeIngredients=";
+    requestString +="@homeIngredients where id=@prefID";
+    requestString += ";";
 
     var row_id = undefined;
 
@@ -45,18 +45,15 @@ var insertIngredients = function(data,callback) {
             //make sure to close the connection before the callback
             connection.close();
             status = "success";
-            callback(status, row_id);
+            callback(status);
         }
 
     });
 
-    request.on('row', function(columns){
-        row_id = (columns[0].value);
-    });
-
     //add variable parameters
     request.addParameter('homeIngredients',TYPES.VarChar, data.homeIng.toString());
-
+    request.addParameter('prefID',TYPES.Int, data.user_id);
+    console.log("INSIDE preferenceAPI insertIng: homeIng="+data.homeIng.toString()+" user_d="+data.user_id+".");
     var connection = new Connection(config);
     connection.on('connect', function(err) {
         if (err) return console.error(err);
