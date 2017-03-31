@@ -1,112 +1,72 @@
 <div class="header container-fluid">
     <div class="row">
         <div class="navbar col-md-2 h1">
-            <a href="/">Foodwise</a>
-        </div>
-        <div class="navbar col-md-1 h5">
-            <a href="/searchRecipes">
-                <div class="navbar_item_icon">
-                    <i class="material-icons">search</i>
-                </div>
-                <div class="navbar_item_text">
-                    Search Recipe
-                </div>
+            <a href="/">
+                <img class="img-responsive" alt="Foodwise" src="http://i.imgur.com/RQBp0J0.png">
             </a>
         </div>
-        <div class="navbar col-md-1 h5">
-            <a href="/viewSales">
-                <div class="navbar_item_icon">
-                    <i class="material-icons">shopping_cart</i>
-                </div>
-                <div class="navbar_item_text">
-                    View Sales
-                </div>
-            </a>
-        </div>
-        <div class="navbar col-md-1 h5">
-            <a href="/homeIngredients">
-                <div class="navbar_item_icon">
-                    <i class="material-icons">home</i>
-                </div>
-                <div class="navbar_item_text">
-                    Home Ingredients
-                </div>
-            </a>
-        </div>
-        <div class="navbar col-md-1 h5">
-            <a href="/setPreferences">
-                <div class="navbar_item_icon">
-                    <i class="material-icons">settings</i>
-                </div>
-                <div class="navbar_item_text">
-                    Set Preferences
-                </div>
-            </a>
-        </div>
-        <div class="navbar col-md-1 h5">
-            <a href="/logout">
-                <div>
-                    <i class="material-icons">person</i>
-                </div>
-                <div class="navbar_item_text">
-                    Logout
-                </div>
-            </a>
-        </div>
+        {{#if user}}
+            <div class="navbar col-md-1 h5">
+                <a href="/searchRecipes">
+                    <div class="navbar_item_icon">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <div class="navbar_item_text">
+                        Search Recipe
+                    </div>
+                </a>
+            </div>
+            <div class="navbar col-md-1 h5">
+                <a href="/viewSales">
+                    <div class="navbar_item_icon">
+                        <i class="material-icons">shopping_cart</i>
+                    </div>
+                    <div class="navbar_item_text">
+                        View Sales
+                    </div>
+                </a>
+            </div>
+            <div class="navbar col-md-1 h5">
+                <a href="/homeIngredients">
+                    <div class="navbar_item_icon">
+                        <i class="material-icons">home</i>
+                    </div>
+                    <div class="navbar_item_text">
+                        Home Ingredients
+                    </div>
+                </a>
+            </div>
+            <div class="navbar col-md-1 h5">
+                <a href="/setPreferences">
+                    <div class="navbar_item_icon">
+                        <i class="material-icons">settings</i>
+                    </div>
+                    <div class="navbar_item_text">
+                        Set Preferences
+                    </div>
+                </a>
+            </div>
+            <div class="navbar col-md-1 h5">
+                <a href="/logout">
+                    <div>
+                        <i class="material-icons">person</i>
+                    </div>
+                    <div class="navbar_item_text">
+                        Log out
+                    </div>
+                </a>
+            </div>
+        {{else}}
+            <div class="navbar col-md-1 h5">
+                <a href="/login">
+                    <div>
+                        <i class="material-icons">person</i>
+                    </div>
+                    <div class="navbar_item_text">
+                        Log in
+                    </div>
+                </a>
+            </div>
+        {{/if}}
     </div>
 </div>
-
-<!--
-<div id="navbar_container">
-    <div class="navbar_item" style="order:1">
-        <a href="">
-            <div class="navbar_item_icon">
-                <i class="material-icons">directions_walk</i>
-            </div>
-            <div class="navbar_item_text">
-                Walking
-            </div>
-        </a>
-    </div>
-    <div class="navbar_item" style="order:2">
-        <a href="Cycling.html">
-            <div class="navbar_item_icon">
-                <i class="material-icons">directions_bike</i>
-            </div>
-            <div class="navbar_item_text">
-                Cycling
-            </div>
-        </a>
-    </div>
-    <div class="navbar_item" style="order:3">
-        <a href="Photos.html">
-            <div class="navbar_item_icon">
-                <i class="material-icons">camera_alt</i>
-            </div>
-            <div class="navbar_item_text">
-                Photos
-            </div>
-        </a>
-    </div>
-    <div class="navbar_item" style="order:4">
-        <a href="Stats.html">
-            <div class="navbar_item_icon">
-                <i class="material-icons">assignment</i>
-            </div>
-            <div class="navbar_item_text">
-                Stats
-            </div>
-        </a>
-    </div>
-    <div class="navbar_item" style="order:5">
-        <a href="About.html">
-            <div class="navbar_item_icon">
-                <i class="material-icons">person</i>
-            </div>
-            <div class="navbar_item_text">
-                About
-            </div>
-        </a>
-    </div>
-</div>
--->

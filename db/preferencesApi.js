@@ -161,6 +161,41 @@ var getAllRelevantPreferencesByUserId = function(userId, callback){
     });
 };
 
+var updatePreferences = function(prefId, data, callback){
+    var requestString = "update p set " +
+        "p.allergies = @allergies, p.dislikes = @dislikes, " +
+        "p.likes = @likes, p.vegetarian = v.vegId, p.nutritionPreferences = n.nutritionId " +
+        "from preferences p join vegLookup v on @vegetarian = v.vegName " +
+        "join nutritionLookup n on @nutrition = n.nutritionType " +
+        "where p.id= @prefId;";
+
+    var request = new Request(requestString, function(err, rowCount, rows){
+        var status = "";
+        if(err){
+            connection.close();
+            status = err;
+            callback(status);
+        } else {
+            connection.close();
+            status = "success";
+            callback(status);
+        }
+    });
+
+    request.addParameter('allergies',TYPES.VarChar, data.allergies );
+    request.addParameter('dislikes', TYPES.VarChar, data.dislikes);
+    request.addParameter('likes', TYPES.VarChar, data.likes);
+    request.addParameter('vegetarian', TYPES.VarChar, data.vegOption);
+    request.addParameter('nutrition', TYPES.VarChar, data.nutritionPref);
+    request.addParameter('prefId', TYPES.Int, prefId);
+    
+    var connection = new Connection(config);
+    connection.on('connect', function(err) {
+        if (err) return console.error(err);
+        connection.execSql(request);
+    });
+};
+
 var crazyJoinString = "select u.userName as username, p.id, p.allergies, p.dislikes, p.likes, v.vegName, n.nutritionType, t1.flavourTypeName as salty, t2.flavourTypeName as sweet, t3.flavourTypeName as bitter, t4.flavourTypeName as meaty, t5.flavourTypeName as spicy " +
 " from users u" +
 " join preferences p On u.preferences = p.id join vegLookup v On p.vegetarian = v.vegId " +
@@ -175,5 +210,6 @@ module.exports = {
     getPreferencesById: getPreferencesById,
     createPref: createPref,
     getAllRelevantPreferencesByUserId: getAllRelevantPreferencesByUserId,
-    insertIngredients: insertIngredients
+    insertIngredients: insertIngredients,
+    updatePreferences: updatePreferences
 };

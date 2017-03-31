@@ -1,12 +1,15 @@
 <div class="body-container">
     <div class="body-content-container">
-        <div class="row">
-            <img src = {{recipe.images.[0].hostedLargeUrl}}>
+        <div class="row form-group">
+            <a class="btn btn-default" href="/searchRecipes">Back to Search</a>
         </div>
-        <div class="row">
+        <div class="row form-group">
+            <img class="img-responsive" alt="Recipe Image" src={{recipe.images.[0].hostedLargeUrl}}>
+        </div>
+        <div class="row form-group">
             <h4>{{recipe.name}}</h4>
         </div>
-        <div class="row">
+        <div class="row form-group">
             <table class="table table-striped">
                 <tr>
                     <th>Ingredient Item</th>
@@ -29,7 +32,7 @@
                 {{/each}}
             </table>
         </div>
-        <div class="row">
+        <div class="row form-group">
             <a class="btn btn-default" href="{{recipe.source.sourceRecipeUrl}}">Visit site for directions</a>
         </div>
     </div>

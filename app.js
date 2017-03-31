@@ -15,8 +15,7 @@ var users = require('./routes/users');
 var searchRecipes = require('./routes/searchRecipes');
 var viewSales = require('./routes/viewSales');
 var homeIngredients = require('./routes/homeIngredientsRoute');
-//C:\wamp\NodeJS\322_project\routes\homeIngredientsRoute.js
-var setPreferences = require('./routes/setPreferences');
+var setPreferences = require('./routes/setPreferencesRoute');
 var recipe = require('./routes/recipeRoute');
 var login = require('./routes/loginRoute');
 var signup = require('./routes/signUpRoute');
@@ -49,7 +48,7 @@ app.use(function(req, res, next){
 });
 
 function requireLogin(req, res, next){
-    if(req.user || req.path === '/login' || req.path === '/signup'){
+    if(req.user || req.path === '/login' || req.path === '/signup' || req.path === '/'){
         next();
     } else {
         res.redirect('/login');

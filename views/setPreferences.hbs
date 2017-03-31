@@ -1,59 +1,59 @@
 <div class="body-container">
     <div class="body-content-container">
+        <h2>Set Preferences</h2>
         <form id="updatePref">
             <div>
                 <div class="row form-group">
                     <div class="col-md-2">
-                        <label for="allergies">Any allergies?</label>
+                        <label for="allergies">Select your allergies:</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="checkbox" name="allergies" value="Peanut-Free"> Peanuts
-                        <br><input type="checkbox" name="allergies" value="Seafood-Free"> Seafood
-                        <br><input type="checkbox" name="allergies" value="Sesame-Free"> Sesame
+                        <input type="checkbox" name="allergies" value="Peanut-Free" {{#ifIn "Peanut-Free" preferences.allergies}} checked {{/ifIn}}> Peanuts
+                        <br><input type="checkbox" name="allergies" value="Seafood-Free" {{#ifIn "Seafood-Free" preferences.allergies}} checked {{/ifIn}}> Seafood
+                        <br><input type="checkbox" name="allergies" value="Sesame-Free" {{#ifIn "Sesame-Free" preferences.allergies}} checked {{/ifIn}}> Sesame
                     </div>
                     <div class="col-md-3">
-                        <input type="checkbox" name="allergies" value="Soy-Free"> Soy
-                        <br><input type="checkbox" name="allergies" value="Dairy-Free"> Dairy
-                        <br><input type="checkbox" name="allergies" value="Egg-Free"> Egg
+                        <input type="checkbox" name="allergies" value="Soy-Free" {{#ifIn "Soy-Free" preferences.allergies}} checked {{/ifIn}}> Soy
+                        <br><input type="checkbox" name="allergies" value="Dairy-Free" {{#ifIn "Dairy-Free" preferences.allergies}} checked {{/ifIn}}> Dairy
+                        <br><input type="checkbox" name="allergies" value="Egg-Free" {{#ifIn "Egg-Free" preferences.allergies}} checked {{/ifIn}}> Egg
                     </div>
                     <div class="col-md-3">
-                        <input type="checkbox" name="allergies" value="Sulfite-Free"> Sulfite
-                        <br><input type="checkbox" name="allergies" value="Tree Nut-Free"> Tree Nut
-                        <br><input type="checkbox" name="allergies" value="Wheat-Free"> Wheat
+                        <input type="checkbox" name="allergies" value="Sulfite-Free" {{#ifIn "Sulfite-Free" preferences.allergies}} checked {{/ifIn}}> Sulfite
+                        <br><input type="checkbox" name="allergies" value="Tree Nut-Free" {{#ifIn "Tree Nut-Free" preferences.allergies}} checked {{/ifIn}}> Tree Nuts
+                        <br><input type="checkbox" name="allergies" value="Wheat-Free" {{#ifIn "Wheat-Free" preferences.allergies}} checked {{/ifIn}}> Wheat
                     </div>
                 </div>
-
                 <div class="row form-group">
                     <div class="col-md-2">
                         <label for="vegOption">Vegetarian option?</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="radio" name="vegOption" value="Vegetarian"> Vegetarian
+                        <input type="radio" name="vegOption" value="Non-Vegetarian" {{#if_eq preferences.vegString "Non-Vegetarian"}} checked {{/if_eq}}> None (Meat-eater)
                     </div>
                     <div class="col-md-3">
-                        <input type="radio" name="vegOption" value="Vegan"> Vegan
+                        <input type="radio" name="vegOption" value="Vegetarian" {{#if_eq preferences.vegString "Vegetarian"}} checked {{/if_eq}}> Vegetarian
                     </div>
                     <div class="col-md-3">
-                        <input type="radio" name="vegOption" value="Non-Vegetarian" checked="checked"> None (meat eater)
+                        <input type="radio" name="vegOption" value="Vegan" {{#if_eq preferences.vegString "Vegan"}} checked{{/if_eq}}> Vegan
                     </div>
                 </div>
                 <h4>Food Preferences (if no answer, leave blank):</h4>
                 <div class="row form-group">
                     <div class="col-md-10">
                         <label for="dislikes">Which foods do you dislike/avoid?</label>
-                        <input type="text" name="dislikes" class="form-control">
+                        <input type="text" name="dislikes" class="form-control" value="{{preferences.dislikes}}">
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-md-10">
                         <label for="likes">Which foods do you love?</label>
-                        <input type="text" name="likes" class="form-control">
+                        <input type="text" name="likes" class="form-control" value="{{preferences.likes}}">
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-md-10">
                         <label for="nutritionPref">Any nutrition preferences?</label>
-                        <input type="text" name="nutritionPref" class="form-control">
+                        <input type="text" name="nutritionPref" class="form-control" value="{{preferences.nutrition}}">
                     </div>
                 </div>
                 <h4>How do you like your food?</h4>
@@ -62,16 +62,16 @@
                         <label for="salty">Salty</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="radio" name="salty" value="Default" checked="checked"> No Preference
+                        <input type="radio" name="salty" value="Default" {{#if_eq preferences.flavours.salty "Default"}} checked {{/if_eq}}> No Preference
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="salty" value="Low"> Low
+                        <input type="radio" name="salty" value="Low" {{#if_eq preferences.flavours.salty "Low"}} checked {{/if_eq}}> Low
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="salty" value="Medium"> Medium
+                        <input type="radio" name="salty" value="Medium" {{#if_eq preferences.flavours.salty "Medium"}} checked {{/if_eq}}> Medium
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="salty" value="High"> High
+                        <input type="radio" name="salty" value="High" {{#if_eq preferences.flavours.salty "High"}} checked {{/if_eq}}> High
                     </div>
                 </div>
                 <div class="row">
@@ -79,16 +79,16 @@
                         <label for="sweet">Sweet</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="radio" name="sweet" value="Default" checked="checked"> No Preference
+                        <input type="radio" name="sweet" value="Default" {{#if_eq preferences.flavours.sweet "Default"}} checked {{/if_eq}}> No Preference
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="sweet" value="Low"> Low
+                        <input type="radio" name="sweet" value="Low" {{#if_eq preferences.flavours.sweet "Low"}} checked {{/if_eq}}> Low
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="sweet" value="Medium"> Medium
+                        <input type="radio" name="sweet" value="Medium" {{#if_eq preferences.flavours.sweet "Medium"}} checked {{/if_eq}}> Medium
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="sweet" value="High"> High
+                        <input type="radio" name="sweet" value="High" {{#if_eq preferences.flavours.sweet "High"}} checked {{/if_eq}}> High
                     </div>
                 </div>
                 <div class="row">
@@ -96,16 +96,16 @@
                         <label for="bitter">Bitter</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="radio" name="bitter" value="Default" checked="checked"> No Preference
+                        <input type="radio" name="bitter" value="Default" {{#if_eq preferences.flavours.bitter "Default"}} checked {{/if_eq}}> No Preference
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="bitter" value="Low"> Low
+                        <input type="radio" name="bitter" value="Low" {{#if_eq preferences.flavours.bitter "Low"}} checked {{/if_eq}}> Low
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="bitter" value="Medium"> Medium
+                        <input type="radio" name="bitter" value="Medium" {{#if_eq preferences.flavours.bitter "Medium"}} checked {{/if_eq}}> Medium
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="bitter" value="High"> High
+                        <input type="radio" name="bitter" value="High" {{#if_eq preferences.flavours.bitter "High"}} checked {{/if_eq}}> High
                     </div>
                 </div>
                 <div class="row">
@@ -113,16 +113,16 @@
                         <label for="savoury">Savoury</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="radio" name="savoury" value="Default" checked="checked"> No Preference
+                        <input type="radio" name="savoury" value="Default" {{#if_eq preferences.flavours.meaty "Default"}} checked {{/if_eq}}> No Preference
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="savoury" value="Low"> Low
+                        <input type="radio" name="savoury" value="Low" {{#if_eq preferences.flavours.meaty "Low"}} checked {{/if_eq}}> Low
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="savoury" value="Medium"> Medium
+                        <input type="radio" name="savoury" value="Medium" {{#if_eq preferences.flavours.meaty "Medium"}} checked {{/if_eq}}> Medium
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="savoury" value="High"> High
+                        <input type="radio" name="savoury" value="High" {{#if_eq preferences.flavours.meaty "High"}} checked {{/if_eq}}> High
                     </div>
                 </div>
                 <div class="row">
@@ -130,20 +130,25 @@
                         <label for="spicy">Spicy</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="radio" name="spicy" value="Default" checked="checked"> No Preference
+                        <input type="radio" name="spicy" value="Default" {{#if_eq preferences.flavours.spicy "Default"}} checked {{/if_eq}}> No Preference
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="spicy" value="Low"> Low
+                        <input type="radio" name="spicy" value="Low" {{#if_eq preferences.flavours.spicy "Low"}} checked {{/if_eq}}> Low
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="spicy" value="Medium"> Medium
+                        <input type="radio" name="spicy" value="Medium" {{#if_eq preferences.flavours.spicy "Medium"}} checked {{/if_eq}}> Medium
                     </div>
                     <div class="col-md-2">
-                        <input type="radio" name="spicy" value="High"> High
+                        <input type="radio" name="spicy" value="High" {{#if_eq preferences.flavours.spicy "High"}} checked {{/if_eq}}> High
                     </div>
                 </div>
             </div>
         </form>
-        <button id="updatePrefButton">Update Preferences</button>
+        <div class="row">
+            <div class="col-md-2" style="padding-top: 20px">
+                <button class="btn btn-default" id="updatePrefButton">Update</button>
+            </div>
+        </div>
     </div>
 </div>
+<script src="/javascripts/setPreferencesScript.js"></script>

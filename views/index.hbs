@@ -1,5 +1,20 @@
 <div class="body-container">
-    <div class="body-content-container">
-        Hey this is SPARTA
+    <div class="body-content-container" style="text-align:center;padding:50px">
+        <div class="row">
+            <img class="img-responsive" alt="Foodwise" src="http://i.imgur.com/UKcv8YU.png">
+        </div>
+        <div class="row" style="padding:50px">
+            <h1>Welcome to Foodwise!</h1>
+            <h4 style="color:green">The smart recipe search engine</h4>
+        </div>
+        {{#if user}}
+            <div class="row">
+                <a class="btn btn-primary btn-lg btn-block" href="/searchRecipes">Click here to search for a recipe</a>
+            </div>
+        {{else}}
+            <div class="row">
+                <a class="btn btn-default btn-lg btn-block" href="/login">Click here to log in / sign up</a>
+            </div>
+        {{/if}}
     </div>
 </div>
