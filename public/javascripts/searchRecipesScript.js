@@ -79,7 +79,9 @@ var setDetailsButtons = function(){
                 data: {ingredients: ingredients},
                 success: function(result){
                     $('#test_dialog').html(result);
-                    $('#test_dialog').dialog();
+                    $('#test_dialog').dialog({
+                        width: 1000
+                    });
                 }
             })
 
