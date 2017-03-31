@@ -48,7 +48,7 @@ app.use(function(req, res, next){
 });
 
 function requireLogin(req, res, next){
-    if(req.user || req.path === '/login' || req.path === '/signup'){
+    if(req.user || req.path === '/login' || req.path === '/signup' || req.path === '/'){
         next();
     } else {
         res.redirect('/login');
