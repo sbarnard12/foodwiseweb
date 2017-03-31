@@ -5,6 +5,8 @@ var preferencesApi = require('../db/preferencesApi');
 var recipeLookup = require(path.resolve( __dirname, "./recipeApiLookup.js"));
 var saleItemApi = require('../db/saleItemApi');
 
+var originalPath = '/v1/api/recipes?_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4&maxResult=25&start=1';
+var originalgetOneOption = "/v1/api/recipe/";
 
 var options = {
     host: 'api.yummly.com',
@@ -47,6 +49,7 @@ var getSearch = function(request, callback){
             //var parseNutrition = parseNutrition(preferences[6].value);
             var flavourString = parseFlavour(preferences[7].value, preferences[8].value, preferences[9].value, preferences[10].value, preferences[11].value);
 
+            options.path = originalPath;
             options.path = options.path + searchString;
             options.path = options.path + allergyString;
             //options.path = options.path + dislikesString;
@@ -134,15 +137,21 @@ var getPreferences = function(userId, formData, callback){
 
 var parseAllergyString = function(allergyString){
     var allergies = "";
-    if(typeof allergyString == "undefined" || allergyString.length == 0 || allergyString.trim().length == 0){
+    if(allergyString != null){
+        if(typeof allergyString == "undefined" || allergyString.length == 0 || allergyString.trim().length == 0){
+            return allergies;
+        }
+        var split = allergyString.split(",");
+        var allergyLookup = recipeLookup.allergies;
+        split.forEach(function(item){
+            if (item == "Tree Nut-Free"){
+                item = "Tree%20Nut-Free";
+            }
+            allergies = allergies + "&allowedAllergy[]=" + allergyLookup[item] + "^" + item;
+        });
         return allergies;
     }
-    var split = allergyString.split(",");
-    var allergyLookup = recipeLookup.allergies;
-    split.forEach(function(item){
-        allergies = allergies + "&allowedAllergy[]=" + allergyLookup[item] + "^" + item;
-    });
-    return allergies;
+    return "";
 };
 
 var parseVegString = function(vegString){
@@ -184,6 +193,7 @@ var recipeIngredients = "";
 var getOne = function(request, callback){
     recipeIngredients = request.query.ingredients;
     var recipeId = request.params.recipeId;
+    getOneOptions.path = originalgetOneOption;
     getOneOptions.path = getOneOptions.path + recipeId + "?" + apikey;
 
     sendRequest(false, function(results){

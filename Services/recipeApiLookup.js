@@ -8,7 +8,7 @@ var allergies = {
     "Dairy-Free": "396",
     "Egg-Free": "397",
     "Sulfite-Free": "401",
-    "Tree Nut-Free": "395",
+    "Tree%20Nut-Free": "395",
     "Wheat-Free": "392"
 };
 

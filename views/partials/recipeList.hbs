@@ -3,14 +3,6 @@
     {{#if isNone}}
         <b>No results found.</b>
     {{else}}
-        <div class="row form-group">
-            <div class="col-md-2">
-                <button id="prev_page_button" class="btn btn-default btn-xs" style="display:none">Previous Page</button>
-            </div>
-            <div class="col-md-2">
-                <button id="next_page_button" class="btn btn-default btn-xs" style="display:none">Next Page</button>
-            </div>
-        </div>
         {{#each recipeList}}
             <div class="row form-group recipeItem" data-value="{{paginate @index}}">
                 <span style="display:none">{{this.id}}</span>

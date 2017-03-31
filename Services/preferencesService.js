@@ -8,7 +8,7 @@ var getPreferencesbyUserId = function(userId, callback) {
     preferencesApi.getAllRelevantPreferencesByUserId(userId, function(status, rowCount, preferences){
         if(status == "success"){
             var preferenceObject = {};
-            if(typeof preferences[2].value != "undefined"){
+            if(typeof preferences[2].value != "undefined" && preferences[2].value != null){
                 preferenceObject.allergies = preferences[2].value.split(",");
             } else {
                 preferenceObject.allergies = [];
