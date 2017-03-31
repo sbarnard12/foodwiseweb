@@ -13,8 +13,20 @@ router.route('/')
 router.route('/:recipeId')
     .get(function(req,res,next){
         recipeService.getOne(req, function(result){
-            res.render('recipeDetailsView', {recipe: result, layout:false})
+            res.render('recipeDetailsView', {recipe: result, layout:false, helpers: {if_eq: if_eq}})
         })
     })
 ;
+
+var if_eq = function(a, b, opts) {
+    //send this file into the view, in order to be able to use if clauses in the view file
+    if(a == b) // Or === depending on your needs
+        return opts.fn(this);
+    else
+        return opts.inverse(this);
+};
+
+
 module.exports = router;
+
+
