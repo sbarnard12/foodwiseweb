@@ -27,6 +27,38 @@ var getPreferencesById = function(prefId, callback){
     });
 };
 
+var getIngredients = function(data,callback) {
+    var requestString = "";
+    requestString += "select homeIngredients from preferences where id=@prefID";
+    requestString += ";";
+
+    var row_id = undefined;
+
+    var request = new Request(requestString, function(err, rowCount, rows){
+        var status = "";
+        if(err){
+            connection.close();
+            status = err;
+            callback(status)
+        } else {
+            //make sure to close the connection before the callback
+            connection.close();
+            status = "success";
+            callback(status);
+        }
+
+    });
+
+    //add variable parameters
+    request.addParameter('prefID',TYPES.Int, data.user_id);
+    //console.log("INSIDE preferenceAPI insertIng: homeIng="+data.homeIng.toString()+" user_d="+data.user_id+".");
+    var connection = new Connection(config);
+    connection.on('connect', function(err) {
+        if (err) return console.error(err);
+        connection.execSql(request);
+    });
+};
+
 var insertIngredients = function(data,callback) {
     var requestString = "";
     requestString += "update preferences set homeIngredients=";
