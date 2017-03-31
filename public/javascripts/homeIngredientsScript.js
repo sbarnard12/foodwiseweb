@@ -16,7 +16,7 @@ var setHomeIngredients = function(){
         }
     })
 
-    $('#prevIngList').html($('#homeIngredientsForm').serialize());
+    //$('#prevIngList').html($('#homeIngredientsForm').serialize());
 };
 
 
