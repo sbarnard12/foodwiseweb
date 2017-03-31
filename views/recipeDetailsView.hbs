@@ -34,9 +34,13 @@
                         {{/if}}
                         {{#if this.price}}
                             <td>{{this.price}}</td>
+                        {{else}}
+                            <td></td>
                         {{/if}}
                         {{#if this.store}}
                             <td>{{this.store}} {{this.location}}</td>
+                        {{else}}
+                            <td></td>
                         {{/if}}
                     </tr>
                 {{/each}}

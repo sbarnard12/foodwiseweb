@@ -1,21 +1,33 @@
 <div id="recipeList">
     <div id="pageNum" data-value="1"></div>
-    {{#each recipeList}}
-        <div class="row form-group recipeItem" data-value="{{paginate @index}}">
-            <span style="display:none">{{this.id}}</span>
-            <span name="ingredients" style="display:none">{{this.ingredients}}</span>
-            <div class="col-lg-4">
-                <img src="{{this.smallImageUrls.[0]}}" style="height:100%;width:100%">
+    {{#if isNone}}
+        <b>No results found.</b>
+    {{else}}
+        <div class="row form-group">
+            <div class="col-md-2">
+                <button id="prev_page_button" class="btn btn-default btn-xs" style="display:none">Previous Page</button>
             </div>
-            <div class="col-lg-6">
-                <div class="row">
-                    <h4>{{this.recipeName}}</h4>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <button name="recipeDetails" class="btn btn-default">Details</button>
+            <div class="col-md-2">
+                <button id="next_page_button" class="btn btn-default btn-xs" style="display:none">Next Page</button>
             </div>
         </div>
-    {{/each}}
+        {{#each recipeList}}
+            <div class="row form-group recipeItem" data-value="{{paginate @index}}">
+                <span style="display:none">{{this.id}}</span>
+                <span name="ingredients" style="display:none">{{this.ingredients}}</span>
+                <div class="col-lg-4">
+                    <img src="{{this.smallImageUrls.[0]}}" style="height:100%;width:100%">
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <h4>{{this.recipeName}}</h4>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button name="recipeDetails" class="btn btn-default">Details</button>
+                </div>
+            </div>
+        {{/each}}
+    {{/if}}
 </div>
 <div id="test_dialog"></div>

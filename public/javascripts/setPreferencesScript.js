@@ -11,7 +11,7 @@ var updatePref = function(){
         data: $('#updatePref').serialize(),
         success: function(result){
             if(result.status == "success"){
-                alert("your preferences have been updated")
+                alert("Your preferences have been updated.")
             }
             console.log(result);
         }

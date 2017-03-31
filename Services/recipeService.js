@@ -55,10 +55,15 @@ var getSearch = function(request, callback){
             //options.path = options.path + parseNutrition;
             options.path = options.path + flavourString;
             sendRequest(true, function(results){
-                results.matches.forEach(function(item, index){
-                    item.ingredients = item.ingredients.join(",");
-                })
-                callback(results);
+                if (results.totalMatchCount == 0){
+                    results.isNone = true;
+                    callback(results)
+                } else {
+                    results.matches.forEach(function(item, index){
+                        item.ingredients = item.ingredients.join(",");
+                    });
+                    callback(results);
+                }
             });
         });
     }
@@ -193,7 +198,11 @@ var getOne = function(request, callback){
             //get sale items, with store info
             saleItemApi.getAllDescriptions(function(status, salesItems){
 
-                var homeIngredientArray = this.homeIngredients.split(",");
+                var homeIngredientArray = [];
+                if (this.homeIngredients != null){
+                    homeIngredientArray = this.homeIngredients.split(",");
+                }
+
 
                 for (var i=0; i< homeIngredientArray.length; i++){
                     homeIngredientArray[i] = homeIngredientArray[i].trim();

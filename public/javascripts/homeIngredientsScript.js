@@ -11,7 +11,7 @@ var setHomeIngredients = function(){
         data: $('#homeIngredientsForm').serialize(),
         success: function(result){
             if(result == "success"){
-                alert("your home ingredients have been updated");
+                alert("Your home ingredients have been updated.");
                 location.reload();
                 //console.log("DONE");//login();
             }

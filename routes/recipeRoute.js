@@ -6,14 +6,14 @@ var recipeService = require('../Services/recipeService.js');
 router.route('/')
     .get(function(req, res, next) {
         recipeService.getSearch(req, function(results){
-            res.render('partials/recipeList', {recipeList: results.matches, layout:false, helpers: {paginate: paginate}});
+            res.render('partials/recipeList', {recipeList: results.matches, isNone: results.isNone, layout:false, helpers: {paginate: paginate}});
         });
     })
 ;
 router.route('/:searchterm')
     .get(function(req,res, next){
         recipeService.getSearch(req, function(results){
-            res.render('partials/recipeList', {recipeList: results.matches, layout:false, helpers: {paginate: paginate}});
+            res.render('partials/recipeList', {recipeList: results.matches, isNone: results.isNone, layout:false, helpers: {paginate: paginate}});
         })
     })
 ;
