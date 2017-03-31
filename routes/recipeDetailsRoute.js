@@ -12,8 +12,8 @@ router.route('/')
 
 router.route('/:recipeId')
     .get(function(req,res,next){
-        recipeService.getOne(req.params.recipeId, function(result){
-            res.render('recipeDetailsView', {recipe: result})
+        recipeService.getOne(req, function(result){
+            res.render('recipeDetailsView', {recipe: result, layout:false})
         })
     })
 ;

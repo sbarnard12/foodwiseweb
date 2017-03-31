@@ -196,6 +196,34 @@ var updatePreferences = function(prefId, data, callback){
     });
 };
 
+var getHomeIngredientsbyUserId = function(userId, callback){
+    var requestString = 'select homeIngredients from preferences where id = (select id from users where id=@userId)'
+
+    var request = new Request(requestString, function(err, rowCount, rows){
+        var status = "";
+        if(err){
+            connection.close();
+            status = err;
+            callback(status);
+        } else {
+            connection.close();
+            status = "success";
+            callback(status, rows[0]);
+        }
+    });
+    
+    request.addParameter('userId', TYPES.Int, userId);
+
+    var connection = new Connection(config);
+    connection.on('connect', function(err) {
+        if (err) return console.error(err);
+        connection.execSql(request);
+    });
+};
+
+
+
+
 var crazyJoinString = "select u.userName as username, p.id, p.allergies, p.dislikes, p.likes, v.vegName, n.nutritionType, t1.flavourTypeName as salty, t2.flavourTypeName as sweet, t3.flavourTypeName as bitter, t4.flavourTypeName as meaty, t5.flavourTypeName as spicy " +
 " from users u" +
 " join preferences p On u.preferences = p.id join vegLookup v On p.vegetarian = v.vegId " +
@@ -212,5 +240,6 @@ module.exports = {
     getAllRelevantPreferencesByUserId: getAllRelevantPreferencesByUserId,
     insertIngredients: insertIngredients,
     updatePreferences: updatePreferences,
-    getIngredients: getIngredients
+    getIngredients: getIngredients,
+    getHomeIngredientsbyUserId: getHomeIngredientsbyUserId
 };

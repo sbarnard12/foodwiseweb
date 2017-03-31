@@ -3,6 +3,7 @@ var path = require('path');
 var userApi = require('../db/userApi');
 var preferencesApi = require('../db/preferencesApi');
 var recipeLookup = require(path.resolve( __dirname, "./recipeApiLookup.js"));
+var saleItemApi = require('../db/saleItemApi');
 
 
 var options = {
@@ -173,13 +174,70 @@ var parseFlavour = function(salty, sweet, bitter, meaty, spicy){
     return flavourString;
 };
 
-var getOne = function(recipeId, callback){
+var recipeIngredients = "";
+
+var getOne = function(request, callback){
+    recipeIngredients = request.query.ingredients;
+    var recipeId = request.params.recipeId;
     getOneOptions.path = getOneOptions.path + recipeId + "?" + apikey;
 
     sendRequest(false, function(results){
-        callback(results);
-    });
+        console.log("test");
+        var test = request.query.ingredients;
+
+        //get home ingredients
+        preferencesApi.getHomeIngredientsbyUserId(request.session.userId, function(status, homeIngredients){
+
+            homeIngredients = homeIngredients[0].value;
+
+            //get sale items, with store info
+            saleItemApi.getAllDescriptions(function(status, salesItems){
+
+                var homeIngredientArray = this.homeIngredients.split(",");
+
+                for (var i=0; i< homeIngredientArray.length; i++){
+                    homeIngredientArray[i] = homeIngredientArray[i].trim();
+                }
+
+                var recipeIngredientArray = this.recipeIngredients.split(",");
+                var tempIngredientLinesObj = new Array(recipeIngredientArray.length);
+
+                var ingredientDescriptions = [];
+                for (var i = 0;i < salesItems.length; i++){
+                    ingredientDescriptions.push(salesItems[i][0].value);
+                }
+
+                //check each recipe ingredient, and compare to home ingredients and sales items
+                recipeIngredientArray.forEach(function(item, index){
+                    //search home ingredient array for current recipe item
+                    if(homeIngredientArray.indexOf(item) != -1){
+                        //user has this item at home
+                        tempIngredientLinesObj[index] = {ingredientLine: results.ingredientLines[index], atHome: true};
+                    } else if (ingredientDescriptions.indexOf(item) != -1){ //then check the sales item db for the current recipe item
+                        var foundItemIndex = ingredientDescriptions.indexOf(item);
+                        
+                        tempIngredientLinesObj[index] = {
+                            ingredientLine: results.ingredientLines[index],
+                            atHome: false,
+                            onSale: true,
+                            price: salesItems[foundItemIndex][1].value,
+                            store: salesItems[foundItemIndex][2].value,
+                            location: salesItems[foundItemIndex][3].value
+                        }
+                    } else { //neither home nor store has the recipe item on sale
+                        tempIngredientLinesObj[index] = {ingredientLine: results.ingredientLines[index], atHome: false, onSale: false};
+                    }
+                });
+                //results
+                results.ingredientLines = tempIngredientLinesObj;
+                callback(results);
+            }.bind({recipeIngredients: this.recipeIngredients, homeIngredients: homeIngredients}))
+        }.bind({recipeIngredients: (this.recipeIngredients)}))
+        
+    }.bind({recipeIngredients:recipeIngredients}))
 };
+
+
 
 module.exports = {
     //getAll: getAll,

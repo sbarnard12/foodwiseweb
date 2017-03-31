@@ -35,7 +35,35 @@ var getBySearch = function(search, callback){
 
 };
 
+var getAllDescriptions = function(callback){
+    var requestString = "select s.description, s.priceString, i.storeName, " +
+        "i.storeLocation from saleItems s  join storeInfo i On s.storeId = i.id";
+
+    var request = new Request(requestString, function(err, rowCount, rows){
+        var status = "";
+        if(err){
+            connection.close();
+            status = err;
+            callback(status);
+        } else {
+            connection.close();
+            status = "success";
+            callback(status, rows);
+        }
+    });
+
+    var connection = new Connection(config);
+    connection.on('connect', function(err) {
+        if (err) return console.error(err);
+        connection.execSql(request);
+    });
+
+
+};
+
+
 
 module.exports = {
-    getBySearch: getBySearch
+    getBySearch: getBySearch,
+    getAllDescriptions: getAllDescriptions
 };
