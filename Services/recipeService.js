@@ -27,6 +27,9 @@ var getSearch = function(request, callback){
 
     if(typeof request.params.searchterm == "undefined"){ //search all
         sendRequest(true, function(results){
+            results.matches.forEach(function(item, index){
+                item.ingredients = item.ingredients.join(",");
+            })
             callback(results);
         });
     } else {
@@ -51,6 +54,9 @@ var getSearch = function(request, callback){
             //options.path = options.path + parseNutrition;
             options.path = options.path + flavourString;
             sendRequest(true, function(results){
+                results.matches.forEach(function(item, index){
+                    item.ingredients = item.ingredients.join(",");
+                })
                 callback(results);
             });
         });

@@ -2,6 +2,7 @@
     {{#each recipeList}}
         <div class="row form-group">
             <span style="display:none">{{this.id}}</span>
+            <span name="ingredients" style="display:none">{{this.ingredients}}</span>
             <div class="col-lg-4">
                 <img src="{{this.smallImageUrls.[0]}}" style="height:100%;width:100%">
             </div>
@@ -16,3 +17,4 @@
         </div>
     {{/each}}
 </div>
+<div id="test_dialog"></div>

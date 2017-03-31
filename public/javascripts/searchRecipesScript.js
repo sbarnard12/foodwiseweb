@@ -28,8 +28,20 @@ var setDetailsButtons = function(){
         $(this).on('click', function(){
             event.preventDefault();
             var recipeId = $(this).closest('.row').children().first().text();
+            var ingredients = $(this).closest('.row').children()[1].innerHTML;
             var url = "http://" +  window.location.host + "/recipeDetails/" + recipeId;
-            window.location = (url);
+            //window.location = (url);
+
+            $.ajax({
+                url: url,
+                method: 'get',
+                data: {ingredients: ingredients},
+                success: function(result){
+                    $('#test_dialog').html(result);
+                    $('#test_dialog').dialog();
+                }
+            })
+
         })
     })
 };

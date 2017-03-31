@@ -16,6 +16,7 @@ router.route('/:searchterm')
             res.render('partials/recipeList', {recipeList: results.matches, layout:false});
         })
     })
+;
 
 module.exports = router;
 /**
