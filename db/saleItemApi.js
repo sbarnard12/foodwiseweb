@@ -9,7 +9,7 @@ var getBySearch = function(search, callback){
 
     var requestString = "select sale.id as productId, sale.productTitle, sale.priceString, sale.itemDescription, store.storeName, store.storeLocation  from saleItems sale " +
     "join storeInfo store On sale.storeId = store.id " +
-    "where productTitle like @searchString Or itemDescription like @searchString";
+    "where productTitle like @searchString Or itemDescription like @searchString Or description like @searchString";
 
     var request = new Request(requestString, function(err, rowCount, rows){
         var status = "";

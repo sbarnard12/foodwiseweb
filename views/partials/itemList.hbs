@@ -1,11 +1,11 @@
 <div id="recipeList">
-    <table>
+    <table class="table table-condensed table-striped">
         <tr>
             <th style="display:none">Id</th>
             <th>Item Name</th>
-            <th>Item description</th>
+            <th>Item Description</th>
             <th>Price</th>
-            <th>Store</th>
+            <th>Store Name</th>
             <th>Store Location</th>
         </tr>
     {{#each itemList}}
@@ -13,7 +13,7 @@
             <td style="display:none">{{this.[0].value}}</td>
             <td>{{this.[1].value}}</td>
             <td>{{this.[3].value}}</td>
-            <td>{{this.[2].value}}</td>
+            <td>${{this.[2].value}}</td>
             <td>{{this.[4].value}}</td>
             <td>{{this.[5].value}}</td>
         </tr>

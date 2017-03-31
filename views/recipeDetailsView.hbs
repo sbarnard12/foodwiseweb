@@ -1,5 +1,5 @@
 <div class="body-container">
-    <div class="body-content-container">
+    <div class="body-content-container" style="width:900px">
         <div class="row form-group">
             <a class="btn btn-default" href="/searchRecipes">Back to Search</a>
         </div>
@@ -10,24 +10,27 @@
             <h4>{{recipe.name}}</h4>
         </div>
         <div class="row form-group">
-            <table class="table table-striped">
-                <tr>
-                    <th>Ingredient Item</th>
+            <table class="table table-condensed table-striped">
+                <tr style="text-align:center">
+                    <th style="text-align:left">Ingredient Item</th>
                     <th>At Home?</th>
                     <th>On Sale?</th>
+                    <th>Sale Price</th>
+                    <th>Sale Location</th>
                 </tr>
                 {{#each recipe.ingredientLines}}
-                    <tr>
-                        <td>{{this}}</td>
+                    <tr style="text-align:center">
+                        <td style="text-align:left">{{this}}</td>
                     <!--If not a home ingredient:-->
                         <td><i class="material-icons" style="color:red">close</i></td>
                     <!--If a home ingredient:
                         <td><i class="material-icons" style="color:green">check</i></td>-->
-
                     <!--If not on sale:
                         <td><i class="material-icons" style="color:red">close</i></td>-->
                     <!--If on sale:-->
                         <td><i class="material-icons" style="color:green">check</i></td>
+                        <td>(PRICE)</td>
+                        <td>(LOCATION)</td>
                     </tr>
                 {{/each}}
             </table>

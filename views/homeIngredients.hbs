@@ -1,18 +1,24 @@
 <div class="body-container">
     <div class="body-content-container">
-        <h4>Update Home Ingredients:</h4>
-        <p><b>NOTE: </b>Please enter the ingredients separated by commas. Do not enter quantities. Entering new ingredients will overwrite previous entries</p>
+        <h3>Update Home Ingredients:</h3>
+        <b>Please note:</b>
+        <ul>
+            <li>Separate ingredients using commas</li>
+            <li>Do not enter quantities</li>
+            <li>Entering new ingredients will overwrite previous entries</li>
+        </ul>
         <form id="homeIngredientsForm">
-            <div class="row form-group">
+            <div>
                 <div class="col-md-8">
                     <input type="text" name="homeIng" class="form-control" placeholder="Ex: carrots, onions, bread" id="homeIng">
                 </div>
                 <input type="submit" class="btn btn-default" id="submit_button">
             </div>
         </form>
-
-        <p>Previously entered Ingredients: </p><div id="prevIngList"></div>
-        {{result}}
+        <div>
+            <br><h4>Previously entered ingredients: </h4><div id="prevIngList"></div>
+            <b>{{result}}</b>
+        </div>
     </div>
 </div>
 <script src="/javascripts/homeIngredientsScript.js"></script>
