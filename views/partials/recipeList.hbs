@@ -1,6 +1,7 @@
 <div id="recipeList">
+    <div id="pageNum" data-value="1"></div>
     {{#each recipeList}}
-        <div class="row form-group">
+        <div class="row form-group recipeItem" data-value="{{paginate @index}}">
             <span style="display:none">{{this.id}}</span>
             <span name="ingredients" style="display:none">{{this.ingredients}}</span>
             <div class="col-lg-4">

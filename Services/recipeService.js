@@ -7,7 +7,7 @@ var recipeLookup = require(path.resolve( __dirname, "./recipeApiLookup.js"));
 
 var options = {
     host: 'api.yummly.com',
-    path: '/v1/api/recipes?_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4&maxResult=10&start=1'
+    path: '/v1/api/recipes?_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4&maxResult=25&start=1'
 };
 
 var getOneOptions = {

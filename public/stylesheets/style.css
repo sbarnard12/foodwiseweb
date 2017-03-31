@@ -5823,7 +5823,7 @@ body {
   background-color: #339933;
   color: white; }
 
-.navbar {
+.navbar, th, td {
   text-align: center; }
 
 .navbar a:link {

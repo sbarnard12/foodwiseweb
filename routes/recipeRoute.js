@@ -1,22 +1,26 @@
 var express = require('express');
 var router = express.Router();
-var flyerService = require('../Services/recipeService.js');
+var recipeService = require('../Services/recipeService.js');
 
 /* GET search page for recipes. */
 router.route('/')
     .get(function(req, res, next) {
-        flyerService.getSearch(req, function(results){
-            res.render('partials/recipeList', {recipeList: results.matches, layout:false});
+        recipeService.getSearch(req, function(results){
+            res.render('partials/recipeList', {recipeList: results.matches, layout:false, helpers: {paginate: paginate}});
         });
     })
 ;
 router.route('/:searchterm')
     .get(function(req,res, next){
-        flyerService.getSearch(req, function(results){
-            res.render('partials/recipeList', {recipeList: results.matches, layout:false});
+        recipeService.getSearch(req, function(results){
+            res.render('partials/recipeList', {recipeList: results.matches, layout:false, helpers: {paginate: paginate}});
         })
     })
 ;
+
+var paginate = function(value, options) {
+    return parseInt((value/5)+1);
+};
 
 module.exports = router;
 /**
