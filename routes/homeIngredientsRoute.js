@@ -4,7 +4,11 @@ var homeIngredientsService = require('../Services/homeIngredientsService.js');
 
 /* GET search page for recipes. */
 router.get('/', function(req, res, next) {
-    res.render('homeIngredients', {});
+    homeIngredientsService.getHomeIngredients(req, function(status, result){
+        console.log("result printed in route"+ status);
+        res.render('homeIngredients', {result:result});
+
+    });
 });
 
 

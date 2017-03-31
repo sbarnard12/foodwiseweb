@@ -23,40 +23,28 @@ var setHomeIngredients= function(req, callback){
 
         callback(result);
     }
-
-    //data.nutritionPref = "Default";
-    //create new user
-
-    /*userApi.checkUserName(data.userName, function(isUnique){
-        if(isUnique){
-            flavourPrefApi.createflavourPref(data, function(status,row_id) {
-                if (status != "success") {
-                    callback(returnError(status));
-                }
-                //pass in the id of the flavour pref table into the userData object
-                data.flavPrefId = row_id;
-                //pass the flavour pref table id into preferences
-                preferencesApi.createPref(data, function (status, row_id) {
-                    if (status != "success") {
-                        callback(returnError(status));
-                    }
-                    //now finally create the user table
-                    data.prefId = row_id;
-                    userApi.createUser(data, function(status){
-                        if(status == "success"){
-                            callback(status);
-                        } else {
-                            callback(returnError(status));
-                        }
-                    });
-                });
-            });
-        }
-    });*/
 };
 
 
+var getHomeIngredients= function(req, callback){
+    //put the flavours into an object to better access them
+
+    var data=req.body;
+    data.user_id=req.session.userId;
+    console.log("inside seghomeing in service file. Userid is "+data.user_id);
+    preferencesApi.getIngredients(data,function(status,rows) {
+        if(status == "success"){
+
+            console.log(rows[0]);
+            callback(status, rows[0].value);
+        } else {
+            callback(status);
+        }
+    });
+};
+
 module.exports={
-    setHomeIngredients: setHomeIngredients
+    setHomeIngredients: setHomeIngredients,
+    getHomeIngredients: getHomeIngredients
 };
 

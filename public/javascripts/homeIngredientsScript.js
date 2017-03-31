@@ -19,13 +19,4 @@ var setHomeIngredients = function(){
     $('#prevIngList').html($('#homeIngredientsForm').serialize());
 };
 
-$( document ).ready( function () {
-    $.ajax({
-        url: 'homeIngredients',
-        method: 'get',
-        data: $('#homeIngredientsForm').serialize(),
-        success: function(result){
-            $('#prevIngList').html(result);
-        }
-    })
-} );
+

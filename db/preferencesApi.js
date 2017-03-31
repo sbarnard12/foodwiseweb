@@ -44,7 +44,7 @@ var getIngredients = function(data,callback) {
             //make sure to close the connection before the callback
             connection.close();
             status = "success";
-            callback(status);
+            callback(status,rows[0]);
         }
 
     });
@@ -211,5 +211,6 @@ module.exports = {
     createPref: createPref,
     getAllRelevantPreferencesByUserId: getAllRelevantPreferencesByUserId,
     insertIngredients: insertIngredients,
-    updatePreferences: updatePreferences
+    updatePreferences: updatePreferences,
+    getIngredients: getIngredients
 };
