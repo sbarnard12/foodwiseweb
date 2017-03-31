@@ -8,15 +8,15 @@ router.route('/')
         res.render('viewSalesView', {});
     })
     .post(function(req,res, next){
-        saleItemService("",req, function(result){
-            res.send("stuff");
+        saleItemService.searchSaleItems("",req, function(result){
+            res.render('partials/itemList', {itemList: result, layout: false});
         })
     })
 ;
 router.route('/:searchterm')
     .post(function(req,res, next){
-        saleItemService(req.params.searchterm, req, function(result){
-            res.send("things");
+        saleItemService.searchSaleItems(req.params.searchterm, req, function(result){
+            res.render('partials/itemList', {itemList: result, layout:false});
         })
     })
 ;

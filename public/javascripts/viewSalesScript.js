@@ -11,7 +11,7 @@ var submitSearch = function(){
         url: url,
         method: "post",
         success: function(result){
-            console.log(result);
+            $('#searchResults').html(result);
         }
     })
 };

@@ -8,6 +8,17 @@ var recipeLookup = require(path.resolve( __dirname, "./recipeApiLookup.js"));
 
 var searchSaleItems = function(searchterm, data, callback){
 
+    data = data.body;
+    data.search = searchterm;
+    
+    saleItemApi.getBySearch(data, function(result,count, rows){
+        if(result == "success"){
+            callback(rows);
+        } else {
+            callback(result);
+        }
+
+    })
     
 
 };
@@ -16,5 +27,5 @@ var searchSaleItems = function(searchterm, data, callback){
 
 
 module.exports = {
-
+    searchSaleItems: searchSaleItems
 }

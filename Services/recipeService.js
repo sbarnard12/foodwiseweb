@@ -122,7 +122,7 @@ var getPreferences = function(userId, formData, callback){
 
 var parseAllergyString = function(allergyString){
     var allergies = "";
-    if(typeof allergyString == "undefined" || allergyString.length == 0){
+    if(typeof allergyString == "undefined" || allergyString.length == 0 || allergyString.trim().length == 0){
         return allergies;
     }
     var split = allergyString.split(",");
