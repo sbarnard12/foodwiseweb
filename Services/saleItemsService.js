@@ -5,9 +5,7 @@ var preferencesApi = require('../db/preferencesApi');
 var saleItemApi = require('../db/saleItemApi');
 var recipeLookup = require(path.resolve( __dirname, "./recipeApiLookup.js"));
 
-
 var searchSaleItems = function(searchterm, data, callback){
-
     data = data.body;
     data.search = searchterm;
     
@@ -17,14 +15,8 @@ var searchSaleItems = function(searchterm, data, callback){
         } else {
             callback(result);
         }
-
     })
-    
-
 };
-
-
-
 
 module.exports = {
     searchSaleItems: searchSaleItems

@@ -10,6 +10,7 @@ router.route('/')
         });
     })
 ;
+
 router.route('/:searchterm')
     .get(function(req,res, next){
         recipeService.getSearch(req, function(results){

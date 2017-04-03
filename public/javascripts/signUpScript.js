@@ -14,8 +14,7 @@ var newLogin = function(){
 		success: function(result){
             if(result == "success"){
                 login();
-            }
-            else{
+            }else{
                 $('#errorMsg').html(result.error);
                 document.getElementById("errorMsg").scrollIntoView(false);
             }

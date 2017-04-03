@@ -4,7 +4,6 @@ var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
 var config = require(path.resolve( __dirname, "./config.js"));
 
-
 var getBySearch = function(search, callback){
 
     var requestString = "select sale.id as productId, sale.productTitle, sale.priceString, sale.itemDescription, store.storeName, store.storeLocation  from saleItems sale " +
@@ -25,7 +24,6 @@ var getBySearch = function(search, callback){
     });
 
     request.addParameter('searchString', TYPES.VarChar, "%" + search.search + "%" );
-
 
     var connection = new Connection(config);
     connection.on('connect', function(err) {
@@ -57,11 +55,7 @@ var getAllDescriptions = function(callback){
         if (err) return console.error(err);
         connection.execSql(request);
     });
-
-
 };
-
-
 
 module.exports = {
     getBySearch: getBySearch,

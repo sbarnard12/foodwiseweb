@@ -2,9 +2,7 @@ var userApi = require('../db/userApi');
 var preferencesApi = require('../db/preferencesApi');
 var flavourPrefApi = require('../db/flavourPrefApi');
 
-
 var newUser = function(data, callback){
-    //put the flavours into an object to better access them
     data.flavours = {
         salty: data.salty,
         sweet: data.sweet,
@@ -17,14 +15,12 @@ var newUser = function(data, callback){
     } else if(typeof data.allergies == 'undefined'){
         data.allergies = " ";
     }
-
     data.nutritionPref = "Default";
     data.favouriteRecipes = "test";
     //create new user
-    
     userApi.checkUserName(data.userName, function(isUnique){
         if(isUnique){
-            flavourPrefApi.createflavourPref(data, function(status,row_id) {
+            flavourPrefApi.createflavourPref(data, function(status, row_id) {
                 if (status != "success") {
                     callback(returnError(status));
                 }
@@ -57,7 +53,6 @@ var newUser = function(data, callback){
 };
 
 var checkUser = function(req, user, callback){
-
     var username = user.userName;
     var password = user.password;
 
@@ -80,7 +75,7 @@ var checkUser = function(req, user, callback){
     });
 };
 
-var getUser = function(req,res, next){
+var getUser = function(req, res, next){
     if(req.session && req.session.userName){
         userApi.getUserByUserName(req.session.userName, function(status, count, user){
             if(count > 0){
@@ -103,14 +98,12 @@ var logoutUser = function(req, callback){
     callback("success");
 }
 
-
 var returnError = function(status){
     var result = {};
     result.status = "fail";
     result.error = status;
     return result;
-}
-;
+};
 
 module.exports = {
     newUser: newUser,

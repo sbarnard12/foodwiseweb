@@ -10,10 +10,9 @@ var price='';
 
 //npm install JSON2 --save
 fetch('http://nofrills-api.herokuapp.com/api/v0/flyers/192').then(function(res) {
-
     return res.json();
 }).then(function(json) {
-    JSONObj=json;
+    JSONObj = json;
 }).then(function() {
     insert();
 });
@@ -41,11 +40,9 @@ var insert = function() {
                     })
                 }
             })
-
         }
     });
 }
-
 
 var resetIDs = function (callback) {
     //console.log("Deleting the brand new product in database...");
@@ -86,9 +83,9 @@ var deletedatabase = function (callback) {
 }
 
 var insertIntoDataBase = function(callback) {
-    number_of_items=JSONObj.products.length;
-// instantiate - provide the table where you'll be inserting to, and a callback
-    var connection2=new Connection(config);
+    number_of_items = JSONObj.products.length;
+    // instantiate - provide the table where you'll be inserting to, and a callback
+    var connection2 = new Connection(config);
     var bulkLoad = connection2.newBulkLoad('saleItems', function (error, rowCount2) {
         if (error) callback(error);
         else {
@@ -105,8 +102,8 @@ var insertIntoDataBase = function(callback) {
     bulkLoad.addColumn('itemDescription', TYPES.VarChar, {length: 255, nullable: false});
 
 // add rows
-    var i=0;
-    for (i=0; i<number_of_items; i++ ) {
+    var i = 0;
+    for (i = 0; i < number_of_items; i++ ) {
         price=clean(JSONObj.products[i].priceString);
         bulkLoad.addRow({storeId: 1, productTitle: JSONObj.products[i].productTitle, priceString: price, itemDescription: JSONObj.products[i].description});
     }
@@ -117,6 +114,4 @@ var insertIntoDataBase = function(callback) {
         console.log("Connected 2");
         connection2.execBulkLoad(bulkLoad);
     });
-
 }
-

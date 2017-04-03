@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
     });
 });
 
-
 router.post('/', function(req, res, next) {
 	//req.session.user
     homeIngredientsService.setHomeIngredients(req, function(result){
@@ -19,16 +18,6 @@ router.post('/', function(req, res, next) {
         res.send(result);
     });
 });
-
-/*
- router.route('/:searchterm')
- .get(function(req,res, next){
- flyerService.getOne(req, function(results){
- res.send(results);
- })
- })
-
- */
 
 module.exports = router;
 /**

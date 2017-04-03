@@ -51,7 +51,6 @@ var submitSearch = function(event){
     $('#setNewPref').css('display', 'none');
     $('#searchResultsLabel').removeAttr('style');
 
-
     $.ajax({
         url: url,
         type: 'GET',
@@ -86,7 +85,6 @@ var setDetailsButtons = function(){
                     });
                 }
             })
-
         })
     })
 };

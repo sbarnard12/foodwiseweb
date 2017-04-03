@@ -43,9 +43,7 @@ var updatePreferences = function(request, callback){
         var feedback = {status: status, count: count, result: result};
         callback(feedback);
     });
-    
 };
-
 
 module.exports = {
     getPreferencesbyUserId: getPreferencesbyUserId,

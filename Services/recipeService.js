@@ -4,7 +4,6 @@ var userApi = require('../db/userApi');
 var preferencesApi = require('../db/preferencesApi');
 var recipeLookup = require(path.resolve( __dirname, "./recipeApiLookup.js"));
 var saleItemApi = require('../db/saleItemApi');
-
 var originalPath = '/v1/api/recipes?_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4&maxResult=25&start=1';
 var originalgetOneOption = "/v1/api/recipe/";
 
@@ -17,17 +16,11 @@ var getOneOptions = {
     host: "api.yummly.com",
     path: "/v1/api/recipe/"
 };
-var apikey = "_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4";
 
-/* var getAll = function(callback){
-    sendRequest(true, function(results){
-        callback(results);
-    });
-}; */
+var apikey = "_app_id=530cab32&_app_key=b20aff85e4721c30bed0b555397494d4";
 
 var getSearch = function(request, callback){
     //set query search term
-
     if(typeof request.params.searchterm == "undefined"){ //search all
         sendRequest(true, function(results){
             results.matches.forEach(function(item, index){
@@ -36,11 +29,8 @@ var getSearch = function(request, callback){
             callback(results);
         });
     } else {
-
         var searchString = parseSearch(request.params.searchterm);
-
         var userId = request.session.userId;
-
         getPreferences(userId, request.query, function(preferences){
             var allergyString = parseAllergyString(preferences[2].value);
             //var dislikesString = parseDislikes(preferences[3].value);
@@ -70,8 +60,6 @@ var getSearch = function(request, callback){
             });
         });
     }
-    
-
 };
 
 var parseSearch = function(string){
@@ -84,12 +72,12 @@ var sendRequest = function(config1, callback){
     var responseFunc = function(response) {
         var str = '';
 
-        //another chunk of data has been recieved, so append it to `str`
+        //another chunk of data has been received, so append it to `str`
         response.on('data', function (chunk) {
             str += chunk;
         });
 
-        //the whole response has been recieved, so we just print it out here
+        //the whole response has been received, so we just print it out here
         response.on('end', function () {
             var test = JSON.parse(str);
             callback(test);
@@ -132,7 +120,6 @@ var getPreferences = function(userId, formData, callback){
             }
         })
     }
-
 };
 
 var parseAllergyString = function(allergyString){
@@ -168,10 +155,9 @@ var parseFlavour = function(salty, sweet, bitter, meaty, spicy){
     var flavourString = "";
     var flavourObject = {"salty": salty, "sweet":sweet, "bitter":bitter, "meaty":meaty, "piquant":spicy};
     for (var index in flavourObject){
+        var flavourLevel = flavourObject[index];
 
-        var flavourlevel = flavourObject[index];
-
-        switch(flavourlevel){
+        switch(flavourLevel){
             case "Default":
                 break;
             case "Low":
@@ -213,7 +199,6 @@ var getOne = function(request, callback){
                     homeIngredientArray = this.homeIngredients.split(",");
                 }
 
-
                 for (var i=0; i< homeIngredientArray.length; i++){
                     homeIngredientArray[i] = homeIngredientArray[i].trim();
                 }
@@ -252,11 +237,8 @@ var getOne = function(request, callback){
                 callback(results);
             }.bind({recipeIngredients: this.recipeIngredients, homeIngredients: homeIngredients}))
         }.bind({recipeIngredients: (this.recipeIngredients)}))
-        
     }.bind({recipeIngredients:recipeIngredients}))
 };
-
-
 
 module.exports = {
     //getAll: getAll,

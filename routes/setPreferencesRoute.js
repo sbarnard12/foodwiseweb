@@ -2,12 +2,13 @@ var express = require('express');
 var router = express.Router();
 var preferencesService = require('../Services/preferencesService');
 
-    /* GET search page for recipes. */
+/* GET search page for recipes. */
 router.get('/', function(req, res, next) {
     preferencesService.getPreferencesbyUserId(req.session.userId, function(preferences){
         res.render('setPreferences', {preferences: preferences, helpers: {if_eq: if_eq, ifIn: ifIn}});
     });
 });
+
 router.post('/', function(req,res,next){
     preferencesService.updatePreferences(req, function(result){
         res.send(result);

@@ -13,6 +13,7 @@ router.route('/')
         })
     })
 ;
+
 router.route('/:searchterm')
     .post(function(req,res, next){
         saleItemService.searchSaleItems(req.params.searchterm, req, function(result){

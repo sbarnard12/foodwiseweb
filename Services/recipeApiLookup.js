@@ -1,4 +1,3 @@
-
 var allergies = {
     "Gluten-Free": "393",
     "Peanut-Free": "394",
@@ -20,5 +19,4 @@ var vegetarian = {
 module.exports = {
     allergies:allergies,
     vegetarian:vegetarian
-    
 }

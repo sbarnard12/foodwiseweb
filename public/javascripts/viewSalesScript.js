@@ -16,14 +16,3 @@ var submitSearch = function(){
         }
     })
 };
-
-
-
-
-
-
-
-
-
-
-

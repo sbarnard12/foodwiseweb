@@ -13,8 +13,7 @@ var login = function(){
         success: function(result){
             if(result == "success"){
                 window.location = "http://localhost:3000/";
-            }
-            else{
+            }else{
                 $('#errorMsg').html(result);
 			}
         }

@@ -65,11 +65,9 @@ var checkUserName = function(userName, callback){
         if (err) return console.error(err);
         connection.execSql(request);
     });
-
 };
 
 var getUserByUserName = function(username, callback){
-
     var requestString = "select * from users where userName = '" + username + "';";
 
     var request = new Request(requestString, function(err, rowCount, rows){
@@ -89,6 +87,7 @@ var getUserByUserName = function(username, callback){
             callback(status, rowCount, rows)
         }
     });
+
     request.on('row', function(columns){
         columns.forEach(function(column){
         })
@@ -99,7 +98,6 @@ var getUserByUserName = function(username, callback){
         if (err) return console.error(err);
         connection.execSql(request);
     });
-
 };
 
 var getUserById = function(userId, callback){
@@ -124,8 +122,6 @@ var getUserById = function(userId, callback){
         connection.execSql(request);
     });
 };
-
-
 
 module.exports = {
     createUser: createUser,
